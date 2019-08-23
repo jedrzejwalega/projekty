@@ -5,7 +5,6 @@ def funkcja(list, k):
     list_length = len(list)
     list_index = range(len(list))
     k_index = range(k)
-    
     if list_length == 0:
         return "Error: Empty list."
     if list_length < k:
@@ -37,7 +36,7 @@ def funkcja(list, k):
                     biggest_new = biggest
         else:
             continue
-    if np.isnan(list).any() == True:
+    if np.isnan(list).any() is True:
         return "Error: Function doesn't accept NaN values."
     output = namedtuple("output", ["list", "list_length", "biggest"])
     parameters = output(list, list_length, biggest_new)

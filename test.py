@@ -1,7 +1,7 @@
 import numpy as np
-from collections import namedtuple
 import unittest
 from biggestthreek import funkcja
+
 
 class TestFunction(unittest.TestCase):
     def test1(self):
@@ -18,10 +18,10 @@ class TestFunction(unittest.TestCase):
 
     def test3(self):
         list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        k  = 4
+        k = 4
         result = funkcja(list, k)
         self.assertEqual(result, "Error: Elements in the list are not divideable by 4.")
-    
+            
     def test4(self):
         list = []
         k = 2
