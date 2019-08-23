@@ -21,25 +21,25 @@ class TestFunction(unittest.TestCase):
         k = 4
         result = funkcja(list, k)
         self.assertEqual(result, "Error: Elements in the list are not divideable by 4.")
-            
+
     def test4(self):
         list = []
         k = 2
         result = funkcja(list, k)
         self.assertEqual(result, "Error: Empty list.")
-    
+
     def test5(self):
         list = ["pies", "wes", "szmes"]
         k = 3
         result = funkcja(list, k)
         self.assertEqual(result, "Error: Function doesn't accept strings.")
-    
+
     def test6(self):
         list = [1, 2, 3]
         k = 10
         result = funkcja(list, k)
         self.assertEqual(result, "Error: Index out of range.")
-    
+
     def test7(self):
         list = [-1, -8, -4, -6]
         k = 2
@@ -73,4 +73,3 @@ class TestFunction(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
