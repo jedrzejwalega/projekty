@@ -2,42 +2,41 @@ import numpy as np
 from collections import namedtuple
 
 
-def funkcja(list, k):
-    list_length = len(list)
-    list_index = range(len(list))
+def funkcja(nums: list, k: int):
+    list_length = len(nums)
     k_index = range(k)
+
+    # checking if the list is alright
+
     if list_length == 0:
         return "Error: Empty list."
     if list_length < k:
         return "Error: Index out of range."
-    if list_length % len(k_index) != 0:
-        return "Error: Elements in the list are not divideable by {k_index}.".format(k_index=len(k_index))
-
-    for n in list_index:
-
-        if type(list[n]) is str:
+    for num in nums:
+        if num is None:
+            return "Error: Function doesn't accept None as a value."
+        if type(num) is str:
             return "Error: Function doesn't accept strings."
 
-        if list_length - n >= len(k_index):
-            k_counter = 0
-            biggest = 0
-            while k_counter < len(k_index):
-                for k_part in k_index:
-                    if list[n + k_part] is None:
-                        return "Error: Function doesn't accept None as a value."
-                    else:
-                        biggest += list[n + k_part]
+    # calculating biggest value
 
-                        k_counter += 1
+    for n in range(list_length):
+
+        if list_length - n >= k:
+            k_counter = 0  # prevents the for loop from adding more values than stated by k
+            biggest = 0
+            while k_counter < k:
+                for k_part in k_index:
+                    biggest += nums[n + k_part]
+                    k_counter += 1
 
             if n == 0:
                 biggest_new = biggest
             else:
-                if biggest > biggest_new:
-                    biggest_new = biggest
+                biggest_new = max(biggest, biggest_new)
         else:
             continue
-    if np.isnan(list).any() is True:
+    if np.isnan(nums).any() == True:
         return "Error: Function doesn't accept NaN values."
     output = namedtuple("output", ["list", "list_length", "biggest"])
     parameters = output(list, list_length, biggest_new)

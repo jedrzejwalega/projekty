@@ -13,14 +13,14 @@ class TestFunction(unittest.TestCase):
     def test2(self):
         list = [1, 2, 3]
         k = 2
-        result = funkcja(list, k)
-        self.assertEqual(result, "Error: Elements in the list are not divideable by 2.")
+        result = funkcja(list, k).biggest
+        self.assertEqual(result, 5)
 
     def test3(self):
         list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         k = 4
-        result = funkcja(list, k)
-        self.assertEqual(result, "Error: Elements in the list are not divideable by 4.")
+        result = funkcja(list, k).biggest
+        self.assertEqual(result, 34)
 
     def test4(self):
         list = []

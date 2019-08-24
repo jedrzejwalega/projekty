@@ -1,12 +1,10 @@
 import numpy as np
-from collections import namedtuple
 
 
-
-def funkcja(list, k):
+def funkcja(list):
     list_length = len(list)
     list_index = range(len(list))
-    k_index = range(k)
+
     if list_length == 0:
         return "Error: Empty list"
     if list_length % 3 != 0:
@@ -17,7 +15,7 @@ def funkcja(list, k):
         if type(list[n]) is str:
             return "Error: Function doesn't accept strings."
         if list_length - n > 2:
-            biggest = list[n] + list[n + 1] + list [n + 2]
+            biggest = list[n] + list[n + 1] + list[n + 2]
             if n == 0:
                 biggest_new = biggest
             else:
@@ -27,74 +25,28 @@ def funkcja(list, k):
             continue
     if np.isnan(list).any() == True:
         return "Error: Function doesn't accept NaN values."
-    output = namedtuple("output", ["list", "list_length", "biggest"])
-    parameters = output(list, list_length, biggest_new)
-    return parameters
+    return biggest_new
 
 
-
-def test_funkcja():
-    test1 = funkcja([1, 2, 3, 4, 5, 6])
-    print(test1)
-    if test1.biggest == 15:
+def test(nums, expected):
+    result = funkcja(nums)
+    if result == expected:
         print("PASS")
     else:
-        print("FAIL") 
-
-    test2 = funkcja([])
-    if test2 == "Error: Empty list":
-        print("PASS")
-    else:
-        print("FAIL") 
-
-    test3 = funkcja([1]) 
-    if test3 == "Error: Elements in the list are not divideable by 3.":
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test4 = funkcja([1, 2]) 
-    if test4 == "Error: Elements in the list are not divideable by 3.":
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test5 = funkcja([1, 2, 3, 4]) 
-    if test5 == "Error: Elements in the list are not divideable by 3.":
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test6 = funkcja([1, 2, 3, 4, 5])
-    if test6 == "Error: Elements in the list are not divideable by 3.":
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test7 = funkcja([1, np.NaN, 8]) 
-    if test7 == "Error: Function doesn't accept NaN values.":
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test8 = funkcja(["echo", "wow", "lol"]) 
-    if test8 == "Error: Function doesn't accept strings.":
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test9 = funkcja([-8, -2, -24, -2, -1, -5]) 
-    if test9.biggest == -8:
-        print("PASS")
-    else:
-        print("FAIL")
-
-    test10 = funkcja([8.0, 2, 34, 25, 26.8, 12.9]) 
-    if test10.biggest == 85.8:
-        print("PASS")
-    else:
-        print("FAIL") 
-
-print(test_funkcja())
+        print("FAIL - list = {list}, expected output = {expected}, actual output = {result}".format(list=nums, expected=expected, result=result))
 
 
+def funkcja_test():
+    test([1, 2, 3, 4, 5, 6], 15)
+    test([], "Error: Empty list")
+    test([1], "Error: Elements in the list are not divideable by 3.")
+    test([1, 2], "Error: Elements in the list are not divideable by 3.")
+    test([1, 2, 3, 4], "Error: Elements in the list are not divideable by 3.")
+    test([1, 2, 3, 4, 5], "Error: Elements in the list are not divideable by 3.")
+    test([1, np.NaN, 8], "Error: Function doesn't accept NaN values.")
+    test(["echo", "wow", "lol"], "Error: Function doesn't accept strings.")
+    test([-8, -2, -24, -2, -1, -5], -8)
+    test([8.0, 2, 34, 25, 26.8, 12.9], 85.8)
+
+
+funkcja_test()
