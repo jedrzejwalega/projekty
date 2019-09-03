@@ -26,4 +26,11 @@ def power(n):
     return options
 
 
-print(power(3))
+
+for i in range(6):
+    sor = (sorted(power(i)))
+    sor.reverse()
+    print(sor)
+    print(len(sor))
+    print("\n")
+
