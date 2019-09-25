@@ -1,0 +1,103 @@
+LOCUS       XM_001712881            2457 bp    mRNA    linear   INV 12-DEC-2007
+DEFINITION  Bigelowiella natans outer plastid envelop protein 75 (toc75) mRNA,
+            complete cds.
+ACCESSION   XM_001712881
+VERSION     XM_001712881.1
+KEYWORDS    RefSeq.
+SOURCE      nucleomorph Bigelowiella natans
+  ORGANISM  Bigelowiella natans
+            Eukaryota; Rhizaria; Cercozoa; Chlorarachniophyceae; Bigelowiella.
+REFERENCE   1  (bases 1 to 2457)
+  AUTHORS   Gilson,P.R., Su,V., Slamovits,C.H., Reith,M.E., Keeling,P.J. and
+            McFadden,G.I.
+  TITLE     Complete nucleotide sequence of the chlorarachniophyte nucleomorph:
+            nature's smallest nucleus
+  JOURNAL   Proc. Natl. Acad. Sci. U.S.A. 103 (25), 9566-9571 (2006)
+   PUBMED   16760254
+REFERENCE   2  (bases 1 to 2457)
+  AUTHORS   Gilson,P.R., Mollard,V., Slamovits,C., Reith,M., Keeling,P. and
+            McFadden,G.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-AUG-2005) School of Botany, University of Melbourne,
+            Royal Parade, Melbourne, Vic 3010, Australia
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. This record is derived from an annotated genomic
+            sequence (NC_010005).
+            COMPLETENESS: incomplete on both ends.
+FEATURES             Location/Qualifiers
+     source          1..2457
+                     /organism="Bigelowiella natans"
+                     /organelle="nucleomorph"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:227086"
+                     /chromosome="2"
+     gene            <1..>2457
+                     /gene="toc75"
+                     /locus_tag="BNATCHR252"
+                     /db_xref="GeneID:5788576"
+     CDS             1..2457
+                     /gene="toc75"
+                     /locus_tag="BNATCHR252"
+                     /codon_start=1
+                     /product="outer plastid envelop protein 75"
+                     /protein_id="XP_001712933.1"
+                     /db_xref="GeneID:5788576"
+                     /translation="MKLSVNNLYEKNNENTSNKEYHIYTNNYSKEESNDNKRLEDFSL
+                     QYLQDFFKEKSRMDDQIDLYLRSKNIILDQSRKPTENMINKLTRRTFSFFQKKSPLHD
+                     LSNSYFYCNSIKIFGTTSNDKILDHESLKNFLSLQTKTICNKKQLFNDINMLQQLKLF
+                     KSVKFFIINKNQGSYDIIINLQKEKIGKIQKLSFVNCNILPNSLKSSIIEHFIGKDND
+                     VINVSLIKKIVDNWYHDWDYLGSTVHGIVGIKDNNLKIVVREAYLNSLNVGFVSEYDE
+                     DDEEYEKNFQIKRFYENLLDPFVKIFHSLFNIKIGQPFNRSIKSEILKYINNLEIINS
+                     FSYYEQHMPTSDDYRYFPFLFDNNENMFIDVFYELGMCTLSSMFVRLTLGFSRLNNEM
+                     KGMSPEYYFESDWELISIKKKIQVFNLYYNKNASIYSDMYDEIEMLCELFMPYFNYSD
+                     DIHNLLNFRLILFIEDGLLSLSDLHDNHSIDNDNDTDLLLNFWEFEKDEILYSKQKTI
+                     SPLAKNNYHYDEIERNKYTQNFEEFQVMCDDQSDPDEDDGDDDIYYDYDEDPFETYRL
+                     GIKMMFEEEVSDTAFVALNYLLNYTIIEDDYESYLDNTENVYNNINTINDTPPLLYNN
+                     QNIDPKLAMQFLFNYNDLQIKSWKISGFKSSYFFETGLSLNGLQQKMLFELTNYSTLY
+                     QKKIGALNGITLILHNKFGYNIGQLPFYEAFILGGSKSTRGYSDGEIGMAKNMLQMSI
+                     EIRLSINSYVDKLFNFFDYSSDLDSSKNLIYNPGDYKLFSGQGSSFGIGFFIGSGRIE
+                     YGINTLKNTPFLNLEYGEKY"
+ORIGIN      
+        1 atgaaattat ctgtaaataa cctatatgaa aaaaacaacg aaaatacttc taataaagaa
+       61 taccatattt atacaaacaa ctactcaaaa gaagaatcaa atgataacaa aaggctagaa
+      121 gatttctcat tacaatattt acaagacttt tttaaggaga aaagtagaat ggatgatcaa
+      181 attgacttat atcttagatc taaaaacata atattagatc aatccagaaa gccaactgaa
+      241 aatatgatta ataaattaac tagacgaact ttttcatttt ttcaaaaaaa aagtccctta
+      301 catgatctat caaatagtta tttttactgt aattctatca aaatttttgg tacaacatca
+      361 aatgataaaa tattagatca tgaatctcta aaaaactttt tatctcttca aactaaaacc
+      421 atttgtaata aaaaacaact ttttaatgat attaatatgt tacaacaatt aaaattgttc
+      481 aaatctgtga aatttttcat tataaataaa aaccaaggat cctacgatat tattattaat
+      541 cttcaaaaag aaaaaattgg caaaatccaa aaactatctt ttgttaattg taatattttg
+      601 ccaaactcat taaaaagttc tataatagaa cattttatcg ggaaagataa cgatgttatc
+      661 aatgtcagct taataaaaaa aatagtagat aactggtacc atgattggga ttatctaggt
+      721 tccacggtac atggaatagt aggcattaaa gacaataatt taaaaatcgt ggttagagaa
+      781 gcctacttga attctttgaa cgttgggttt gtatcagaat acgatgaaga tgatgaagaa
+      841 tatgaaaaaa attttcaaat taaacgcttc tatgaaaatt tattggatcc tttcgtcaaa
+      901 atttttcatt ctctctttaa tataaaaatt ggacagcctt ttaacagatc aatcaaatca
+      961 gagattctaa aatatatcaa taatttagaa attattaact ctttctctta ctacgaacag
+     1021 catatgccta cttctgatga ttatagatat tttccatttt tatttgataa taatgaaaac
+     1081 atgtttatcg atgtttttta tgaattaggc atgtgtacat tatcctcaat gtttgtcaga
+     1141 ctaacattag gcttcagccg attaaataac gaaatgaaag gcatgtctcc agagtattac
+     1201 tttgagagcg attgggaact aatttcaatt aaaaaaaaaa ttcaagtatt taatctatac
+     1261 tacaacaaaa acgctagtat ttatagcgat atgtatgatg aaatcgaaat gctttgtgaa
+     1321 ttatttatgc catacttcaa ctacagtgac gatattcaca acttgttgaa tttccgttta
+     1381 atactattta ttgaagatgg attattatct ttaagtgact tacatgacaa tcatagtatt
+     1441 gataacgata atgatacaga ccttttacta aatttttggg aatttgaaaa agatgaaata
+     1501 ttatattcaa aacaaaaaac tattagccca ctagctaaaa ataattatca ttacgacgag
+     1561 atagaaagaa ataaatacac acaaaacttt gaagaatttc aggtaatgtg tgatgatcag
+     1621 tctgaccctg acgaggatga tggtgatgat gatatttatt atgattacga tgaagatcct
+     1681 ttcgaaacct atagacttgg tattaaaatg atgttcgaag aagaagtatc tgatacagct
+     1741 ttcgtggcac tgaattattt attaaattat acaataatag aagatgacta tgaaagttat
+     1801 cttgataata ctgaaaacgt ctataataat atcaacacca taaacgatac cccaccttta
+     1861 ttatataata atcaaaatat tgatcctaaa ttagcaatgc agtttctttt taattataat
+     1921 gatttacaaa taaaatcgtg gaaaattagt ggcttcaaaa gttcttattt ttttgaaacc
+     1981 ggcttatctc ttaatggttt acaacaaaaa atgttgtttg aattaacaaa ctactcaaca
+     2041 ttgtatcaga agaaaatagg agcacttaac ggtattactt taattcttca taataaattt
+     2101 ggttataaca taggacagct gccattttat gaagctttta tattaggggg ttctaagtca
+     2161 accagaggat attctgatgg agaaataggt atggctaaga atatgttaca aatgtccata
+     2221 gagatccgat tatcaataaa ttcttacgta gacaaattat ttaatttttt tgattattca
+     2281 agtgatttgg attcatctaa aaatctaata tacaatccag gggattacaa actttttagt
+     2341 ggccaaggat caagttttgg aataggcttc tttattggtt caggtagaat agaatacgga
+     2401 attaatactt tgaagaatac gccattttta aatcttgaat atggtgagaa atattaa
+//
+
