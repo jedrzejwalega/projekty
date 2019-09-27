@@ -1,0 +1,45 @@
+<phyloxml xmlns="http://www.phyloxml.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd">
+  <phylogeny rooted="true">
+    <clade>
+      <color>
+        <red>0</red>
+        <green>0</green>
+        <blue>255</blue>
+      </color>
+      <clade>
+        <color>
+          <red>250</red>
+          <green>128</green>
+          <blue>114</blue>
+        </color>
+        <clade>
+          <clade>
+            <name>A</name>
+          </clade>
+          <clade>
+            <name>B</name>
+          </clade>
+        </clade>
+        <clade>
+          <clade>
+            <name>C</name>
+          </clade>
+          <clade>
+            <name>D</name>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <clade>
+          <name>E</name>
+        </clade>
+        <clade>
+          <name>F</name>
+        </clade>
+        <clade>
+          <name>G</name>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+</phyloxml>
