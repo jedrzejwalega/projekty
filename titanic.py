@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
-
+import seaborn as sns
 from sklearn import preprocessing
 import matplotlib.pyplot as plt 
+from sklearn.feature_selection import RFECV
 
 train_titanic = pd.read_csv("train.csv")
 # print(train_titanic.head())
@@ -152,9 +153,25 @@ plt.xlabel("Fare")
 plt.xlim(-40, 250)
 plt.show()
 
-# Exploration of Class (work in progress):
+# Exploration of Class:
 
-
-plt.bar(train_titanic["Pclass"], height=train_titanic["Survived"])
-
+sns.barplot("Pclass", "Survived", data=train_titanic, color="green")
 plt.show()
+
+# Exploration of Embarked port:
+sns.barplot(x="Embarked", y="Survived", data=train_titanic, color="red")
+plt.show()
+
+# Explotation of traveling alone vs with family:
+sns.barplot(x="TravelAlone", y="Survived", data=train_final, color="yellow")
+plt.show()
+
+print(train_titanic)
+print("\n \n \n", train_final)
+
+# Exploration of sex:
+sns.barplot(x="Sex", y="Survived", data=train_titanic, color="purple")
+plt.show()
+
+# Feature selection:
+rfecv = RFECV(estimator=LogisticRegression(), step=1, cv=10, scoring="accuracy")

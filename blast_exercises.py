@@ -1,7 +1,6 @@
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio import Entrez
-from Bio.Blast import NCBIWWW
 from Bio.Blast import NCBIXML
 from Bio import SearchIO
 
@@ -89,3 +88,13 @@ print("\n")
 print(blast_file[3].seq_len)
 print(blast_file[3].description)
 print(blast_file[3].id)
+
+fourth_hit = blast_file[3]
+single_hsp = fourth_hit[0]
+
+print("Single hsp: ", single_hsp, "\n" "\n" "\n")
+print("Single hsp gaps: ", single_hsp.gap_num)
+print("Single hsp type: ", type(single_hsp))
+print("Repeated nucleotides: ", single_hsp.ident_num)
+print("E-value of single_hsp: ", single_hsp.evalue)
+print("\n", "Single hsp - number of alignments: ", len(single_hsp.aln_all))

@@ -7,14 +7,15 @@ from Bio.Align import MultipleSeqAlignment
 from Bio.Alphabet import DNAAlphabet
 from Bio import AlignIO
 from Bio.Align.Applications import ClustalwCommandline
+from Bio import Entrez
 
 
 
 blast_file = SearchIO.read("l_protein_blast.xml", "blast-xml")
 # print(blast_file, "\n")
-for hit in blast_file:
-    for hsp in hit:
-        print(hsp.query)
+# for hit in blast_file:
+#     for hsp in hit:
+        # print(hsp.query)
 
 # def fasting(blast_file):
 #     fasta_list = []
@@ -40,7 +41,7 @@ def multiple_alignmenting(blast_file):
 
 
 to_fasta = fasting(blast_file)
-print(to_fasta)
+# print(to_fasta)
 
 to_phylip = multiple_alignmenting(blast_file)
 # print(to_phylip)
@@ -49,6 +50,28 @@ to_phylip = multiple_alignmenting(blast_file)
 
 # file = AlignIO.convert("blast_phylip.phy", "phylip", "blast_fasta_final.fasta", "fasta")
 
-cline = ClustalwCommandline(infile = "blast_fasta_final.fasta")
-print(cline)
-stout, sterr = cline()
+# cline = ClustalwCommandline(infile = "blast_fasta_final.fasta")
+# print(cline)
+# stout, sterr = cline()
+
+
+Entrez.email = "jedrzejwalega@gmail.com"
+handle = Entrez.efetch(id="KF438023.1", rettype="gb", db="nucleotide")
+genes = SeqIO.read(handle, "genbank")
+handle.close()
+
+
+def find_protein_l(genes):
+    for feature in genes.features:
+        if feature.type == "CDS":
+            if feature.qualifiers["product"] == ["photosystem II protein L"]:
+                my_gene = genes[feature.location.start : feature.location.end]
+                if [my_gene.seq.translate(to_stop=True)] == feature.qualifiers["translation"]:
+                    return my_gene
+                else:
+                    return "Error: translation of gene sequence is not equal to translation in feature."
+
+l_protein_sequence = find_protein_l(genes)
+print(l_protein_sequence.seq)
+
+# SeqIO.write(l_protein_sequence, "l_fasta.fasta", "fasta")
