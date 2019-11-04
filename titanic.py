@@ -4,6 +4,7 @@ import seaborn as sns
 from sklearn import preprocessing
 import matplotlib.pyplot as plt 
 from sklearn.feature_selection import RFECV
+from sklearn import titanic
 
 train_titanic = pd.read_csv("train.csv")
 # print(train_titanic.head())
