@@ -1,0 +1,1461 @@
+<?xml version="1.0"?>
+<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">
+<BlastOutput>
+  <BlastOutput_program>blastn</BlastOutput_program>
+  <BlastOutput_version>BLASTN 2.10.0+</BlastOutput_version>
+  <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>
+  <BlastOutput_db>nt_v5</BlastOutput_db>
+  <BlastOutput_query-ID>Query_154057</BlastOutput_query-ID>
+  <BlastOutput_query-def>KF438023.1 Lotharella sp. CCMP622 plastid, complete genome</BlastOutput_query-def>
+  <BlastOutput_query-len>117</BlastOutput_query-len>
+  <BlastOutput_param>
+    <Parameters>
+      <Parameters_expect>10</Parameters_expect>
+      <Parameters_sc-match>2</Parameters_sc-match>
+      <Parameters_sc-mismatch>-3</Parameters_sc-mismatch>
+      <Parameters_gap-open>5</Parameters_gap-open>
+      <Parameters_gap-extend>2</Parameters_gap-extend>
+      <Parameters_filter>L;m;</Parameters_filter>
+    </Parameters>
+  </BlastOutput_param>
+<BlastOutput_iterations>
+<Iteration>
+  <Iteration_iter-num>1</Iteration_iter-num>
+  <Iteration_query-ID>Query_154057</Iteration_query-ID>
+  <Iteration_query-def>KF438023.1 Lotharella sp. CCMP622 plastid, complete genome</Iteration_query-def>
+  <Iteration_query-len>117</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|553832027|gb|KF438023.1|</Hit_id>
+  <Hit_def>Lotharella sp. CCMP622 plastid, complete genome</Hit_def>
+  <Hit_accession>KF438023</Hit_accession>
+  <Hit_len>70997</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>212.28</Hsp_bit-score>
+      <Hsp_score>234</Hsp_score>
+      <Hsp_evalue>2.53055e-51</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>675</Hsp_hit-from>
+      <Hsp_hit-to>791</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>117</Hsp_identity>
+      <Hsp_positive>117</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|1003382766|dbj|AP014949.1|</Hit_id>
+  <Hit_def>Lotharella vacuolata plastid DNA, complete sequence, strain: CCMP240</Hit_def>
+  <Hit_accession>AP014949</Hit_accession>
+  <Hit_len>71557</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>167.196</Hsp_bit-score>
+      <Hsp_score>184</Hsp_score>
+      <Hsp_evalue>9.43882e-38</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>70878</Hsp_hit-from>
+      <Hsp_hit-to>70762</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>107</Hsp_identity>
+      <Hsp_positive>107</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTTGAGTTAAATCGTACTAGTCTTTATTGGGGATTATTATTAATATTTGTTTTAGCCGTTTTATTTTCAAGCTATATCTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||||||||||||||||| || ||||||||||| ||||| |||||||||||| | ||||||||||||||||| |||||||| ||||| ||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|1003382704|dbj|AP014948.1|</Hit_id>
+  <Hit_def>Partenskyella glossopodia plastid DNA, complete sequence, strain: RCC365</Hit_def>
+  <Hit_accession>AP014948</Hit_accession>
+  <Hit_len>72620</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>153.671</Hsp_bit-score>
+      <Hsp_score>169</Hsp_score>
+      <Hsp_evalue>2.07904e-33</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>59416</Hsp_hit-from>
+      <Hsp_hit-to>59532</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>104</Hsp_identity>
+      <Hsp_positive>104</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAGTAAATCAAATCCTAACAAACAAAATGTTGAATTAAATCGTACAAGTTTATATTGGGGATTACTATTAATTTTTGTTTTAGGAGTATTGTTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||| ||||||||||| ||||||||||| |||||||||||||| ||| |||||||||||||||| ||||| |||||||||| ||| || || || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|1003382643|dbj|AP014947.1|</Hit_id>
+  <Hit_def>Gymnochlora stellata plastid DNA, complete sequence, strain: CCMP2053</Hit_def>
+  <Hit_accession>AP014947</Hit_accession>
+  <Hit_len>67451</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>149.163</Hsp_bit-score>
+      <Hsp_score>164</Hsp_score>
+      <Hsp_evalue>2.53279e-32</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>66796</Hsp_hit-from>
+      <Hsp_hit-to>66680</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>103</Hsp_identity>
+      <Hsp_positive>103</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAGTAAATCAAATCCTAATAAACAAAACGTTGAATTAAATAGAACAAGTCTGTATTGGGGTTTATTATTAATATTTGTTTTAGCTGTATTATTTTCAAGTTATATATTTAACTAA</Hsp_hseq>
+      <Hsp_midline>|||||||| |||||||||||||||||||| || ||||||||| | || ||||| |||||||| ||| | ||||||||||||||||| || ||||| ||||||||||||||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|773554524|emb|LN810504.1|</Hit_id>
+  <Hit_def>Bryopsis plumosa chloroplast complete genome, strain West4718</Hit_def>
+  <Hit_accession>LN810504</Hit_accession>
+  <Hit_len>106859</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>144.654</Hsp_bit-score>
+      <Hsp_score>159</Hsp_score>
+      <Hsp_evalue>1.07697e-30</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>73482</Hsp_hit-from>
+      <Hsp_hit-to>73588</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>96</Hsp_identity>
+      <Hsp_positive>96</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAACTGTTGAATTAAATCGAACGAGTTTATACTGGGGATTATTATTAATTTTTGTTTTAGCAGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| |||||| |||| ||||||||| | ||||| |||||||||||||||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|1483570421|gb|MH545251.1|</Hit_id>
+  <Hit_def>Batophora oerstedii photosystem II protein L (psbL) gene, complete cds; chloroplast</Hit_def>
+  <Hit_accession>MH545251</Hit_accession>
+  <Hit_len>117</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>140.146</Hsp_bit-score>
+      <Hsp_score>154</Hsp_score>
+      <Hsp_evalue>1.31202e-29</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>11</Hsp_hit-from>
+      <Hsp_hit-to>117</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>95</Hsp_identity>
+      <Hsp_positive>95</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAAATGTAGAATTAAATCGAACAAGTTTATATTGGGGACTTTTATTAATTTTTGTATTAGCAGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||||||| ||||||||||| || ||| ||||||||||| |  | ||||| ||||| |||||||||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|952953316|gb|KT624929.1|</Hit_id>
+  <Hit_def>Carteria crucifera clone contig755 chloroplast, partial genome</Hit_def>
+  <Hit_accession>KT624929</Hit_accession>
+  <Hit_len>1151</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>140.146</Hsp_bit-score>
+      <Hsp_score>154</Hsp_score>
+      <Hsp_evalue>1.31202e-29</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>685</Hsp_hit-from>
+      <Hsp_hit-to>791</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>95</Hsp_identity>
+      <Hsp_positive>95</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAATGTTGAATTAAACCGTACGAGTCTTTATTGGGGACTCCTATTAATTTTTGTTTTAGCTGTTTTATTTTCAAGTTATATTTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||||||| |||||||| ||||||||||| ||||||||| | || ||||| ||||||||||| |||||||| ||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|698348881|gb|KM462873.1|</Hit_id>
+  <Hit_def>Neocystis brevis culture-collection CAUP&lt;CZH&gt;:D802 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KM462873</Hit_accession>
+  <Hit_len>211747</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>136.539</Hsp_bit-score>
+      <Hsp_score>150</Hsp_score>
+      <Hsp_evalue>1.59836e-28</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>107984</Hsp_hit-from>
+      <Hsp_hit-to>107880</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>93</Hsp_identity>
+      <Hsp_positive>93</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCCAACAAACAATCTGTAGAATTAAATCGTACTAGTCTATATTGGGGACTACTTTTAATTTTTGTTTTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||| || ||||||  ||| |||||||||||||| ||||||||||||||| |||| ||||| ||||||||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|1509835249|ref|NC_039524.1|</Hit_id>
+  <Hit_def>Codium arabicum voucher HV03886 chloroplast, complete genome</Hit_def>
+  <Hit_accession>NC_039524</Hit_accession>
+  <Hit_len>79309</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>78664</Hsp_hit-from>
+      <Hsp_hit-to>78770</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAACTGTAGAATTGAATCGAACAAGTTTATATTGGGGATTATTATTAATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||| ||| ||||| ||||| || ||| |||||||||||||| | ||||| ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|1482680188|gb|MH591107.1|</Hit_id>
+  <Hit_def>Codium arabicum voucher HV03886 chloroplast, complete genome</Hit_def>
+  <Hit_accession>MH591107</Hit_accession>
+  <Hit_len>79309</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>78664</Hsp_hit-from>
+      <Hsp_hit-to>78770</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAACTGTAGAATTGAATCGAACAAGTTTATATTGGGGATTATTATTAATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||| ||| ||||| ||||| || ||| |||||||||||||| | ||||| ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>11</Hit_num>
+  <Hit_id>gi|1111669385|ref|NC_032043.1|</Hit_id>
+  <Hit_def>Codium simulans chloroplast, complete genome</Hit_def>
+  <Hit_accession>NC_032043</Hit_accession>
+  <Hit_len>91509</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>81248</Hsp_hit-from>
+      <Hsp_hit-to>81354</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAACTGTAGAATTAAATAGAACAAGTTTATATTGGGGATTATTATTAATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||| ||| ||||||||| | || ||| |||||||||||||| | ||||| ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>12</Hit_num>
+  <Hit_id>gi|1381384598|ref|NC_037366.1|</Hit_id>
+  <Hit_def>Codium sp. &apos;arenicola&apos; chloroplast, complete genome &gt;gi|1189444831|gb|KY819066.1| Codium sp. &apos;arenicola&apos; chloroplast, complete genome</Hit_def>
+  <Hit_accession>NC_037366</Hit_accession>
+  <Hit_len>83933</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>83457</Hsp_hit-from>
+      <Hsp_hit-to>83563</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAACTGTAGAATTAAATAGAACAAGTTTATATTGGGGATTATTATTAATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||| ||| ||||||||| | || ||| |||||||||||||| | ||||| ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>13</Hit_num>
+  <Hit_id>gi|1036230008|gb|KT946603.1|</Hit_id>
+  <Hit_def>Codium simulans chloroplast, complete genome</Hit_def>
+  <Hit_accession>KT946603</Hit_accession>
+  <Hit_len>91509</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>81248</Hsp_hit-from>
+      <Hsp_hit-to>81354</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAACTGTAGAATTAAATAGAACAAGTTTATATTGGGGATTATTATTAATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||| ||| ||||||||| | || ||| |||||||||||||| | ||||| ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>14</Hit_num>
+  <Hit_id>gi|334851174|gb|HQ700713.1|</Hit_id>
+  <Hit_def>Schizomeris leibleinii culture-collection UTEX:LB 1228 chloroplast, complete genome</Hit_def>
+  <Hit_accession>HQ700713</Hit_accession>
+  <Hit_len>182759</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>15803</Hsp_hit-from>
+      <Hsp_hit-to>15909</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAGTTGTAGAATTAAACCGTACAAGTCTTTATTGGGGATTATTATTAATTTTTGTTTTAGCAGTATTATTTTCAAGTTATGTATTTAACTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||  ||| |||||||| ||||| ||||| |||||||||||| | ||||| |||||||||||||| ||||| ||||||||| ||||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>15</Hit_num>
+  <Hit_id>gi|260176711|gb|GQ892829.1|</Hit_id>
+  <Hit_def>Bryopsis hypnoides chloroplast, complete genome</Hit_def>
+  <Hit_accession>GQ892829</Hit_accession>
+  <Hit_len>153429</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>83730</Hsp_hit-from>
+      <Hsp_hit-to>83836</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAACTGTTGAATTGAATCGAACAAGTTTATACTGGGGATTATTATTAATTTTTGTTTTAGCAGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||| ||||| || ||| |||| ||||||||| | ||||| |||||||||||||||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+    <Hsp>
+      <Hsp_num>2</Hsp_num>
+      <Hsp_bit-score>46.3705</Hsp_bit-score>
+      <Hsp_score>50</Hsp_score>
+      <Hsp_evalue>0.222372</Hsp_evalue>
+      <Hsp_query-from>88</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>99350</Hsp_hit-from>
+      <Hsp_hit-to>99379</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>28</Hsp_identity>
+      <Hsp_positive>28</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>30</Hsp_align-len>
+      <Hsp_qseq>GTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>GTTTTATTTTCAAGTTATATCTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>16</Hit_num>
+  <Hit_id>gi|134270089|gb|EF506945.1|</Hit_id>
+  <Hit_def>Leptosira terrestris UTEX 333 chloroplast, complete genome</Hit_def>
+  <Hit_accession>EF506945</Hit_accession>
+  <Hit_len>195081</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>6</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>74006</Hsp_hit-from>
+      <Hsp_hit-to>74117</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>97</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>112</Hsp_align-len>
+      <Hsp_qseq>TAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>TAAATCAAATCCTAACAAACAATCTGTTGAATTAAATCGTACAAGTCTTTATTGGGGTCTATTATTAATCTTTGTATTAGCTGTTTTATTCTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||| ||||||||||| ||||||  ||| |||||||||||||| ||||| ||||||||  || | ||||| ||||| ||||| |||||||||||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>17</Hit_num>
+  <Hit_id>gi|2224352|dbj|AB001684.1|</Hit_id>
+  <Hit_def>Chlorella vulgaris C-27 chloroplast DNA, complete sequence</Hit_def>
+  <Hit_accession>AB001684</Hit_accession>
+  <Hit_len>150613</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>135.637</Hsp_bit-score>
+      <Hsp_score>149</Hsp_score>
+      <Hsp_evalue>5.57884e-28</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>53152</Hsp_hit-from>
+      <Hsp_hit-to>53046</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>94</Hsp_identity>
+      <Hsp_positive>94</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAGTGTAGAATTAAATCGTACCAGTCTATACTGGGGACTTTTATTAATTTTTGTTTTAGCAGTTTTATTTTCAAGTTATATTTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||||||||| |||||||| |||||| |  | ||||| |||||||||||||||||||| ||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>18</Hit_num>
+  <Hit_id>gi|1482675571|gb|MH591093.1|</Hit_id>
+  <Hit_def>Pseudochlorodesmis sp. HV01306a chloroplast, partial genome</Hit_def>
+  <Hit_accession>MH591093</Hit_accession>
+  <Hit_len>18743</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>131.129</Hsp_bit-score>
+      <Hsp_score>144</Hsp_score>
+      <Hsp_evalue>6.79641e-27</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>2671</Hsp_hit-from>
+      <Hsp_hit-to>2777</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>93</Hsp_identity>
+      <Hsp_positive>93</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAAGTGTTGAATTAAATAGAACAAGTCTATATTGGGGTTTATTACTAATTTTTGTTTTAGCAGTTTTATTTTCTAGTTATATCTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||| | || |||||||||||||| ||| |  |||| |||||||||||||||||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>19</Hit_num>
+  <Hit_id>gi|1229242509|gb|KY629620.1|</Hit_id>
+  <Hit_def>Micractinium conductrix plastid, complete genome</Hit_def>
+  <Hit_accession>KY629620</Hit_accession>
+  <Hit_len>129436</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>131.129</Hsp_bit-score>
+      <Hsp_score>144</Hsp_score>
+      <Hsp_evalue>6.79641e-27</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>129105</Hsp_hit-from>
+      <Hsp_hit-to>129211</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>93</Hsp_identity>
+      <Hsp_positive>93</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAGTGTAGAATTAAATCGTACCAGTTTATACTGGGGACTTTTATTAATTTTTGTATTAGCAGTTTTATTCTCAAGTTATATTTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||||||||| ||| |||| |||||| |  | ||||| ||||| |||||||||||||||||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>20</Hit_num>
+  <Hit_id>gi|1229242363|gb|KY629617.1|</Hit_id>
+  <Hit_def>Chlorella sp. ATCC 30562 plastid, complete genome</Hit_def>
+  <Hit_accession>KY629617</Hit_accession>
+  <Hit_len>124881</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>131.129</Hsp_bit-score>
+      <Hsp_score>144</Hsp_score>
+      <Hsp_evalue>6.79641e-27</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>111205</Hsp_hit-from>
+      <Hsp_hit-to>111311</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>93</Hsp_identity>
+      <Hsp_positive>93</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAGTGTAGAATTAAATCGTACCAGTTTATACTGGGGACTTTTATTAATTTTTGTGTTAGCAGTTTTATTCTCAAGTTATATCTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||||||||| ||| |||| |||||| |  | ||||| ||||| |||||||||||||||||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>21</Hit_num>
+  <Hit_id>gi|668349488|gb|KJ718922.1|</Hit_id>
+  <Hit_def>Chlorella variabilis isolate NC64A chloroplast, complete genome &gt;gi|760173399|gb|KP271969.1| Chlorella variabilis isolate crs4cvariabilis2014 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KJ718922</Hit_accession>
+  <Hit_len>124793</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>131.129</Hsp_bit-score>
+      <Hsp_score>144</Hsp_score>
+      <Hsp_evalue>6.79641e-27</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>70436</Hsp_hit-from>
+      <Hsp_hit-to>70542</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>93</Hsp_identity>
+      <Hsp_positive>93</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAGTGTAGAATTAAATCGTACCAGTTTATACTGGGGACTTTTATTAATTTTTGTGTTAGCAGTTTTATTCTCAAGTTATATCTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||||||||| ||| |||| |||||| |  | ||||| ||||| |||||||||||||||||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>22</Hit_num>
+  <Hit_id>gi|325296270|gb|HQ914635.1|</Hit_id>
+  <Hit_def>Chlorella variabilis plastid, complete genome</Hit_def>
+  <Hit_accession>HQ914635</Hit_accession>
+  <Hit_len>124579</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>131.129</Hsp_bit-score>
+      <Hsp_score>144</Hsp_score>
+      <Hsp_evalue>6.79641e-27</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>13452</Hsp_hit-from>
+      <Hsp_hit-to>13558</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>93</Hsp_identity>
+      <Hsp_positive>93</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAGTGTAGAATTAAATCGTACCAGTTTATACTGGGGACTTTTATTAATTTTTGTGTTAGCAGTTTTATTCTCAAGTTATATCTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||||||||| ||| |||| |||||| |  | ||||| ||||| |||||||||||||||||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>23</Hit_num>
+  <Hit_id>gi|110810181|gb|DQ851108.1|</Hit_id>
+  <Hit_def>Bigelowiella natans plastid, complete genome</Hit_def>
+  <Hit_accession>DQ851108</Hit_accession>
+  <Hit_len>69166</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>131.129</Hsp_bit-score>
+      <Hsp_score>144</Hsp_score>
+      <Hsp_evalue>6.79641e-27</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>68447</Hsp_hit-from>
+      <Hsp_hit-to>68331</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>99</Hsp_identity>
+      <Hsp_positive>99</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAGTAAATCAAATCCAAATAAACAAAGTGTTGAGCTAAATCGTACAAGCTTATATTGGGGTTTATTATTAATTTTTGTTTTAGCCGTATTATTCTCAAGCTACATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||| |||||||| |||||||||| ||| ||  |||||||||| ||  |||||||||| ||| | ||||| ||||||||||| || ||||||||||| || || |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>24</Hit_num>
+  <Hit_id>gi|1189444653|gb|KY819064.1|</Hit_id>
+  <Hit_def>Chlorodesmis fastigiata chloroplast, complete genome</Hit_def>
+  <Hit_accession>KY819064</Hit_accession>
+  <Hit_len>88592</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>130.227</Hsp_bit-score>
+      <Hsp_score>143</Hsp_score>
+      <Hsp_evalue>2.37218e-26</Hsp_evalue>
+      <Hsp_query-from>7</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>68776</Hsp_hit-from>
+      <Hsp_hit-to>68885</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>96</Hsp_identity>
+      <Hsp_positive>96</Hsp_positive>
+      <Hsp_gaps>1</Hsp_gaps>
+      <Hsp_align-len>111</Hsp_align-len>
+      <Hsp_qseq>AAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AAGT-AAACCCTAATAAGCAAAGTGTAGAATTAAATCGAACAAGTTTATATTGGGGACTTCTCTTAATTTTTGTTTTAGCAGTTTTATTTTCGAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| ||| |||||||| |||| ||| ||||||||||| || ||| ||||||||||| | || ||||| |||||||||||||||||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>25</Hit_num>
+  <Hit_id>gi|1482686517|gb|MH591113.1|</Hit_id>
+  <Hit_def>Udotea sp. TZ0819 chloroplast, complete genome</Hit_def>
+  <Hit_accession>MH591113</Hit_accession>
+  <Hit_len>90749</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>129.325</Hsp_bit-score>
+      <Hsp_score>142</Hsp_score>
+      <Hsp_evalue>2.37218e-26</Hsp_evalue>
+      <Hsp_query-from>12</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>70786</Hsp_hit-from>
+      <Hsp_hit-to>70891</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>106</Hsp_align-len>
+      <Hsp_qseq>AAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AAATCCCAATAAGCAAAGTGTAGAATTAAATCGAACAAGTTTATATTGGGGACTTCTCTTAATTTTTGTTTTAGCAGTTTTATTTTCGAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||| ||||| |||| ||| ||||||||||| || ||| ||||||||||| | || ||||| |||||||||||||||||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>26</Hit_num>
+  <Hit_id>gi|1066801076|gb|KX808497.1|</Hit_id>
+  <Hit_def>Derbesia sp. WEST4838 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KX808497</Hit_accession>
+  <Hit_len>115765</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>129.325</Hsp_bit-score>
+      <Hsp_score>142</Hsp_score>
+      <Hsp_evalue>2.37218e-26</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>116</Hsp_query-to>
+      <Hsp_hit-from>38677</Hsp_hit-from>
+      <Hsp_hit-to>38782</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>106</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAATAGTTGAATTAAATCGTACAAGTTTATATTGGGGATTATTACTAATCTTCGTATTGGCAGTTTTATTCTCAAGTTATATTTTTAATTA</Hsp_hseq>
+      <Hsp_midline>||||||| ||||||||||  || |||||||||||||| ||| |||||||||||||| |  |||| || || || ||||||||||||||||||||||| ||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>27</Hit_num>
+  <Hit_id>gi|1185543199|gb|KY407659.1|</Hit_id>
+  <Hit_def>Ignatius tetrasporus culture UTEX:2012 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KY407659</Hit_accession>
+  <Hit_len>239387</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>127.522</Hsp_bit-score>
+      <Hsp_score>140</Hsp_score>
+      <Hsp_evalue>8.27973e-26</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>178831</Hsp_hit-from>
+      <Hsp_hit-to>178935</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>91</Hsp_identity>
+      <Hsp_positive>91</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCTAACAAACAAAATGTAGAATTAAATCGTACAAGTCTATATTGGGGACTTTTACTAATTTTTGTTTTAGCTGTATTATTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||| ||||||||||| |||||||||||||| ||||||||||||||| |  |  |||| ||||||||||| || ||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>28</Hit_num>
+  <Hit_id>gi|1185543109|gb|KY407658.1|</Hit_id>
+  <Hit_def>Pseudocharacium americanum culture UTEX:2112 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KY407658</Hit_accession>
+  <Hit_len>239448</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>127.522</Hsp_bit-score>
+      <Hsp_score>140</Hsp_score>
+      <Hsp_evalue>8.27973e-26</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>178873</Hsp_hit-from>
+      <Hsp_hit-to>178977</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>91</Hsp_identity>
+      <Hsp_positive>91</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCTAACAAACAAAATGTAGAATTAAATCGTACAAGTCTATATTGGGGACTTTTACTAATTTTTGTTTTAGCTGTATTATTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||| ||||||||||| |||||||||||||| ||||||||||||||| |  |  |||| ||||||||||| || ||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>29</Hit_num>
+  <Hit_id>gi|698349960|gb|KM462885.1|</Hit_id>
+  <Hit_def>Dicloster acuatus culture-collection SAG:41.98 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KM462885</Hit_accession>
+  <Hit_len>169201</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>127.522</Hsp_bit-score>
+      <Hsp_score>140</Hsp_score>
+      <Hsp_evalue>8.27973e-26</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>23733</Hsp_hit-from>
+      <Hsp_hit-to>23837</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>91</Hsp_identity>
+      <Hsp_positive>91</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCCAATAAACAAACTGTAGAATTAAATCGTACCAGTTTATACTGGGGACTTTTATTAATTTTTGTGTTGGCAGTTTTATTCTCAAGTTATATCTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||| |||||||||| ||| |||||||||||||| ||| |||| |||||| |  | ||||| ||||| || ||||||||||||||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>30</Hit_num>
+  <Hit_id>gi|698349773|gb|KM462883.1|</Hit_id>
+  <Hit_def>Geminella minor culture-collection SAG:22.88 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KM462883</Hit_accession>
+  <Hit_len>129187</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>127.522</Hsp_bit-score>
+      <Hsp_score>140</Hsp_score>
+      <Hsp_evalue>8.27973e-26</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>52781</Hsp_hit-from>
+      <Hsp_hit-to>52677</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>91</Hsp_identity>
+      <Hsp_positive>91</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCCAACAAACAAAATGTTGAATTAAACCGTACTAGTCTTTATTGGGGATTATTATTAATCTTCGTTTTAGCAGTATTATTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||| || ||||||||||| |||||||| ||||| ||||| |||||||||||| | ||||| || ||||||||||| ||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>31</Hit_num>
+  <Hit_id>gi|698349607|gb|KM462881.1|</Hit_id>
+  <Hit_def>Interfilum terricola culture-collection SAG:20.91 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KM462881</Hit_accession>
+  <Hit_len>187843</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>127.522</Hsp_bit-score>
+      <Hsp_score>140</Hsp_score>
+      <Hsp_evalue>8.27973e-26</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>81042</Hsp_hit-from>
+      <Hsp_hit-to>80938</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>91</Hsp_identity>
+      <Hsp_positive>91</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCCAACAAACAAAATGTTGAATTAAACCGTACTAGTCTTTATTGGGGATTATTATTAATCTTCGTTTTAGCAGTATTATTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||| || ||||||||||| |||||||| ||||| ||||| |||||||||||| | ||||| || ||||||||||| ||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>32</Hit_num>
+  <Hit_id>gi|698349261|gb|KM462877.1|</Hit_id>
+  <Hit_def>Gloeotilopsis sterilis culture-collection UTEX:1704 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KM462877</Hit_accession>
+  <Hit_len>132626</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>127.522</Hsp_bit-score>
+      <Hsp_score>140</Hsp_score>
+      <Hsp_evalue>8.27973e-26</Hsp_evalue>
+      <Hsp_query-from>13</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>53132</Hsp_hit-from>
+      <Hsp_hit-to>53028</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>91</Hsp_identity>
+      <Hsp_positive>91</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>AATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>AATCCCAACAAACAAAATGTTGAATTAAACCGTACTAGTCTTTATTGGGGATTATTATTAATCTTCGTTTTAGCAGTATTATTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||| || ||||||||||| |||||||| ||||| ||||| |||||||||||| | ||||| || ||||||||||| ||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>33</Hit_num>
+  <Hit_id>gi|1691371982|gb|MH983006.1|</Hit_id>
+  <Hit_def>Micractinium sp. LBA 32 chloroplast, complete genome</Hit_def>
+  <Hit_accession>MH983006</Hit_accession>
+  <Hit_len>109688</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>78349</Hsp_hit-from>
+      <Hsp_hit-to>78455</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCCAATAAACAAAGTGTAGAATTAAATCGTACCAGTTTATACTGGGGACTTTTATTAATTTTCGTATTAGCAGTTTTATTCTCAAGTTATATTTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||||||||| ||| |||| |||||| |  | ||||| || || |||||||||||||||||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>34</Hit_num>
+  <Hit_id>gi|1642526297|ref|NC_042255.1|</Hit_id>
+  <Hit_def>Ulva lactuca voucher L0054996 chloroplast, complete genome</Hit_def>
+  <Hit_accession>NC_042255</Hit_accession>
+  <Hit_len>95997</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>6201</Hsp_hit-from>
+      <Hsp_hit-to>6317</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAAACCAAACCCAAATAAACAAACTGTAGAATTAAATCGTACAAGTCTATACTGGGGTTTATTACTTATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||| ||| |||||||||||||| |||||||| ||||| ||| |  | || ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>35</Hit_num>
+  <Hit_id>gi|1607264275|gb|MH730972.1|</Hit_id>
+  <Hit_def>Ulva lactuca voucher L0054996 chloroplast, complete genome</Hit_def>
+  <Hit_accession>MH730972</Hit_accession>
+  <Hit_len>95997</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>6201</Hsp_hit-from>
+      <Hsp_hit-to>6317</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAAACCAAACCCAAATAAACAAACTGTAGAATTAAATCGTACAAGTCTATACTGGGGTTTATTACTTATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||| ||| |||||||||||||| |||||||| ||||| ||| |  | || ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>36</Hit_num>
+  <Hit_id>gi|1509778741|gb|MG778440.1|</Hit_id>
+  <Hit_def>Oedogonium angustistomum hypothetical protein gene, complete cds; I polypeptide of photosystem II (psbI) gene, exon 2 and partial cds; and photosystem II protein VI (psbF), photosystem II protein L (psbL), and J protein of photosystem II (psbJ) genes, complete cds; chloroplast</Hit_def>
+  <Hit_accession>MG778440</Hit_accession>
+  <Hit_len>3224</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>2594</Hsp_hit-from>
+      <Hsp_hit-to>2700</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCTAATAAACAAGTTGTAGAATTAAATCGTACTAGTCTTTATTGGGGCTTATTGCTAATTTTTGTATTAGCTGTTTTATTTTCAAGCTATATTTTCAATTAA</Hsp_hseq>
+      <Hsp_midline>|||||||||||||||||  ||| |||||||||||||| ||||| |||||||| ||| || |||| ||||| ||||| |||||||| ||||| ||||| || ||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>37</Hit_num>
+  <Hit_id>gi|1482675889|gb|MH591100.1|</Hit_id>
+  <Hit_def>Pseudoderbesia arbuscula voucher HV03339 chloroplast, partial genome</Hit_def>
+  <Hit_accession>MH591100</Hit_accession>
+  <Hit_len>20092</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>168</Hsp_hit-from>
+      <Hsp_hit-to>274</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAACTGTTGAATTAAACCGAACGAGTTTATACTGGGGTTTATTATTAATTTTTGTTTTAGCAGTATTATTTTCTAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| |||||||| || |||||| |||| ||||| ||| | ||||| |||||||||||||| ||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>38</Hit_num>
+  <Hit_id>gi|1482674814|gb|MH591082.1|</Hit_id>
+  <Hit_def>Dichotomosiphon tuberosus chloroplast, partial genome</Hit_def>
+  <Hit_accession>MH591082</Hit_accession>
+  <Hit_len>79498</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>18006</Hsp_hit-from>
+      <Hsp_hit-to>17900</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAAGTGTTGAATTAAATCGAACTAGTTTATATTGGGGACTTTTATTAATTTTTGTGTTAGCAGTATTATTTTCGAGTTATATATTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| || ||| ||||||||||| |  | ||||| ||||| |||||||| ||||| || ||||||||||||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>39</Hit_num>
+  <Hit_id>gi|1482674794|gb|MH591081.1|</Hit_id>
+  <Hit_def>Dichotomosiphon tuberosus chloroplast, partial genome</Hit_def>
+  <Hit_accession>MH591081</Hit_accession>
+  <Hit_len>17652</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>1913</Hsp_hit-from>
+      <Hsp_hit-to>2019</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAAGTGTTGAATTAAATCGAACTAGTTTATATTGGGGACTTTTATTAATTTTTGTGTTAGCAGTATTATTTTCGAGTTATATATTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| || ||| ||||||||||| |  | ||||| ||||| |||||||| ||||| || ||||||||||||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>40</Hit_num>
+  <Hit_id>gi|1409970461|gb|MG721932.1|</Hit_id>
+  <Hit_def>Scotinosphaera sp. NIES-154 PsbL (psbL) gene, complete cds; chloroplast</Hit_def>
+  <Hit_accession>MG721932</Hit_accession>
+  <Hit_len>117</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>117</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGATTAAACCAAATCCTAATAAACAATCAGTTGAATTAAACCGTACTAGTCTTTATTGGGGATTACTATTAATTTTCGTACTAGCTGTATTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||||||||||||||||   || |||||||| ||||| ||||| |||||||||||||| ||||| || ||  |||| || ||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>41</Hit_num>
+  <Hit_id>gi|1409970317|gb|MG721860.1|</Hit_id>
+  <Hit_def>Ulothrix zonata PsbL (psbL) gene, complete cds; chloroplast</Hit_def>
+  <Hit_accession>MG721860</Hit_accession>
+  <Hit_len>117</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>117</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAACCCAAACCCAAATAAACAATCTGTTGAACTAAACCGTACAAGTCTTTACTGGGGATTACTTTTAATTTTTGTTTTAGCTGTTTTATTTTCAAGTTATATTTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||  ||| ||| |||| ||||| ||||| || ||||||||||| ||||| ||||||||||| |||||||| ||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>42</Hit_num>
+  <Hit_id>gi|1392939311|dbj|AP018696.1|</Hit_id>
+  <Hit_def>Ulva ohnoi chloroplast DNA, complete genome</Hit_def>
+  <Hit_accession>AP018696</Hit_accession>
+  <Hit_len>103313</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>37845</Hsp_hit-from>
+      <Hsp_hit-to>37961</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAAACCAAACCCAAATAAACAAACTGTAGAATTAAATCGTACAAGTCTATACTGGGGTTTATTACTTATTTTTGTATTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||| ||| |||||||||||||| |||||||| ||||| ||| |  | || ||||| ||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>43</Hit_num>
+  <Hit_id>gi|1381384260|ref|NC_037363.1|</Hit_id>
+  <Hit_def>Bryopsis sp. HV04063 chloroplast, complete genome &gt;gi|1189444564|gb|KY819063.1| Bryopsis sp. HV04063 chloroplast, complete genome</Hit_def>
+  <Hit_accession>NC_037363</Hit_accession>
+  <Hit_len>100655</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>99168</Hsp_hit-from>
+      <Hsp_hit-to>99274</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAACTGTTGAATTAAATCGAACAAGTTTATACTGGGGGTTATTACTAATTTTTGTTTTAGCTGTTTTATTTTCAAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| || ||| |||| ||||| ||| |  |||| ||||||||||| |||||||| ||||||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>44</Hit_num>
+  <Hit_id>gi|1073857952|gb|KX342867.1|</Hit_id>
+  <Hit_def>Ulva prolifera chloroplast, complete genome</Hit_def>
+  <Hit_accession>KX342867</Hit_accession>
+  <Hit_len>93066</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>63697</Hsp_hit-from>
+      <Hsp_hit-to>63813</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAAACCAAACCCAAATAAACAAAATGTAGAATTAAATCGTACAAGTCTATACTGGGGTTTATTACTTATTTTTGTATTAGCTGTTTTATTTTCGAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||||||| |||||||||||||| |||||||| ||||| ||| |  | || ||||| ||||| |||||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>45</Hit_num>
+  <Hit_id>gi|1195857158|gb|KY766996.1|</Hit_id>
+  <Hit_def>Ostreobium sp. HV05007bc isolate sN197 chloroplast, partial genome</Hit_def>
+  <Hit_accession>KY766996</Hit_accession>
+  <Hit_len>15804</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>6985</Hsp_hit-from>
+      <Hsp_hit-to>7091</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAAGTGTTGAATTAAATAGAACAAGTTTATATTGGGGATTACTACTAATTTTTGTTTTAGCCGTATTATTCTCTAGCTATATCTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||| | || ||| ||||||||||||||||  |||| ||||||||||| || |||||||| || ||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>46</Hit_num>
+  <Hit_id>gi|1191081501|gb|KY509314.1|</Hit_id>
+  <Hit_def>Ostreobium sp. HV05042 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KY509314</Hit_accession>
+  <Hit_len>80584</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>71485</Hsp_hit-from>
+      <Hsp_hit-to>71591</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAACTGTTGAATTAAATCGAACTAGTTTATATTGGGGACTATTATTAATTTTTGTTTTGGCTGTACTATTTTCAAGTTATATATTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| || ||| ||||||||||| || | ||||| |||||||| || ||  |||| |||||||||||||||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>47</Hit_num>
+  <Hit_id>gi|1191081419|gb|KY509313.1|</Hit_id>
+  <Hit_def>Avrainvillea mazei chloroplast, partial genome</Hit_def>
+  <Hit_accession>KY509313</Hit_accession>
+  <Hit_len>93932</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>93506</Hsp_hit-from>
+      <Hsp_hit-to>93400</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAAGTGTTGAATTAAATCGAACGAGTTTATATTGGGGATTTTTATTAATTTTTGTATTGGCCGTATTATTTTCGAGTTATATATTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| |||||| |||||||||||||  | ||||| ||||| || || || ||||| || ||||||||||||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>48</Hit_num>
+  <Hit_id>gi|1191081401|gb|KY509312.1|</Hit_id>
+  <Hit_def>Ostreobium sp. HV05007a chloroplast, partial genome</Hit_def>
+  <Hit_accession>KY509312</Hit_accession>
+  <Hit_len>16340</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>11</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>6757</Hsp_hit-from>
+      <Hsp_hit-to>6863</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>1</Hsp_hit-frame>
+      <Hsp_identity>92</Hsp_identity>
+      <Hsp_positive>92</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>107</Hsp_align-len>
+      <Hsp_qseq>CAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>CAAATCCAAATAAACAAACTGTTGAATTAAATCGAACTAGTTTATATTGGGGACTATTATTAATTTTTGTTTTGGCTGTACTATTTTCAAGTTATATATTTAATTAA</Hsp_hseq>
+      <Hsp_midline>||||||| |||||||||| ||| ||||||||||| || ||| ||||||||||| || | ||||| |||||||| || ||  |||| |||||||||||||||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>49</Hit_num>
+  <Hit_id>gi|1185542934|gb|KY407656.1|</Hit_id>
+  <Hit_def>Trichosarcina mucosa culture SAG:4.90 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KY407656</Hit_accession>
+  <Hit_len>227181</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>99343</Hsp_hit-from>
+      <Hsp_hit-to>99227</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAAACCAAACCCAAATAAACAATCTGTTGAATTAAACCGTACAAGTCTTTACTGGGGATTACTTTTAATTTTCGTTTTAGCTGTTTTATTTTCAAGTTATATTTTTAACTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||  ||| |||||||| ||||| ||||| || ||||||||||| ||||| || |||||||| |||||||| ||||||||||| ||||| |||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>50</Hit_num>
+  <Hit_id>gi|1033204486|gb|KX058323.1|</Hit_id>
+  <Hit_def>Ulva linza isolate QD08 chloroplast, complete genome</Hit_def>
+  <Hit_accession>KX058323</Hit_accession>
+  <Hit_len>86726</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>126.62</Hsp_bit-score>
+      <Hsp_score>139</Hsp_score>
+      <Hsp_evalue>2.88991e-25</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>117</Hsp_query-to>
+      <Hsp_hit-from>69748</Hsp_hit-from>
+      <Hsp_hit-to>69632</Hsp_hit-to>
+      <Hsp_query-frame>1</Hsp_query-frame>
+      <Hsp_hit-frame>-1</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>117</Hsp_align-len>
+      <Hsp_qseq>ATGAGTAAGTCAAATCCTAATAAACAAAATGTCGAATTAAATCGTACGAGTCTATATTGGGGATTACTGTTAATATTTGTTTTAGCAGTTTTATTCTCAAGTTATATATTTAATTAA</Hsp_qseq>
+      <Hsp_hseq>ATGAATAAACCAAACCCAAATAAACAAAATGTAGAATTAAATCGTACAAGTCTATACTGGGGTTTATTACTTATTTTTGTATTAGCTGTTTTATTTTCGAGTTATATTTTTAATTAA</Hsp_hseq>
+      <Hsp_midline>|||| |||  |||| || |||||||||||||| |||||||||||||| |||||||| ||||| ||| |  | || ||||| ||||| |||||||| || |||||||| |||||||||</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>56322339</Statistics_db-num>
+      <Statistics_db-len>247402720713</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.41</Statistics_kappa>
+      <Statistics_lambda>0.625</Statistics_lambda>
+      <Statistics_entropy>0.78</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+</BlastOutput_iterations>
+</BlastOutput>

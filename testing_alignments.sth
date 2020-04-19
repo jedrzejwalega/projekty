@@ -1,0 +1,36 @@
+# STOCKHOLM 1.0
+#=GF SQ 3
+Alpha AATT
+#=GS Alpha AC Alpha
+#=GS Alpha DE Alpha
+Beta GGCC
+#=GS Beta AC Beta
+#=GS Beta DE Beta
+Gamma CCTT
+#=GS Gamma AC Gamma
+#=GS Gamma DE Gamma
+//
+# STOCKHOLM 1.0
+#=GF SQ 3
+Alpha AAGT
+#=GS Alpha AC Alpha
+#=GS Alpha DE Alpha
+Beta GGTC
+#=GS Beta AC Beta
+#=GS Beta DE Beta
+Gamma CCGT
+#=GS Gamma AC Gamma
+#=GS Gamma DE Gamma
+//
+# STOCKHOLM 1.0
+#=GF SQ 3
+Alpha AACT
+#=GS Alpha AC Alpha
+#=GS Alpha DE Alpha
+Beta GGTT
+#=GS Beta AC Beta
+#=GS Beta DE Beta
+Gamma CCAT
+#=GS Gamma AC Gamma
+#=GS Gamma DE Gamma
+//

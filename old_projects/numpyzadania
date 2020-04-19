@@ -1,0 +1,18 @@
+import numpy as np
+
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+species = np.genfromtxt(url, delimiter=',', dtype='str', usecols=4)
+species_small = np.sort(np.random.choice(species, size=20))
+
+print(species_small)
+unique_species = np.unique(species)
+index_list = []
+plant_list = []
+for index, plant in np.ndenumerate(unique_species):
+  index_list.append(index)
+  plant_list.append(plant)
+    
+print(index_list)
+print(plant_list)
+dictionary = dict(zip(plant_list, index_list)
+print(dictionary)
