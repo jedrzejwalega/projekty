@@ -25,17 +25,17 @@ class World():
         self.surf = None
         self.non_player_positions = None
         self.banned_positions = None
-        self.level = self.read_level()
-        self.load_background()
-        self.load_movable()
+        level = self.read_level()
+        self.load_background(level)
+        self.load_movable(level)
 
     def read_level(self):
         with open(self.filepath, "r") as handle:
             level = handle.read()
         return level
 
-    def load_background(self):
-        raw_rows = [line for line in self.level.split("\n") if line != ""]
+    def load_background(self, level):
+        raw_rows = [line for line in level.split("\n") if line != ""]
         rows = []
         for line in raw_rows:
             new_line = []
@@ -54,8 +54,8 @@ class World():
         self.y_pixels = columns_num * self.texture_size
         self.surf = pygame.display.set_mode((self.y_pixels, self.x_pixels))
 
-    def load_movable(self):
-        raw_rows = [line for line in self.level.split("\n") if line != ""]
+    def load_movable(self, level):
+        raw_rows = [line for line in level.split("\n") if line != ""]
         rows = []
         
         x = 0
