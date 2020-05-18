@@ -104,7 +104,7 @@ with torch.no_grad():
         image_num += 1
 
 figure, axes = plt.subplots(figsize=(12.8, 14.4))
-axes.plot(range(0,500,10), losses, color="red")
+axes.plot(range(0,epochs,10), losses, color="red")
 plt.title("Loss change in model training", fontsize=18)
 axes.set_xlabel("Epochs", fontsize=15)
 axes.set_ylabel("Loss", fontsize=15)
