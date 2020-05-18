@@ -7,7 +7,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import matplotlib.pyplot as plt
-import matplotlib.axes as ax
+
+
 
 train_data_path = "/home/jedrzej/Desktop/mnist/train.csv"
 test_data_path = "/home/jedrzej/Desktop/mnist/test.csv"
