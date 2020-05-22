@@ -11,6 +11,12 @@ from torchvision.datasets import mnist
 from torchvision import transforms
 
 
+def one_hot_encode(data: torch.utils.data.Dataset):
+    return keras.utils.to_categorical(data, 10)
+
+def flatten_vector(data: torch.utils.data.Dataset):
+    return torch.flatten(data)
+
 class SimpleNet(nn.Module):
     def __init__(self):
         super(SimpleNet, self).__init__()
@@ -24,53 +30,40 @@ class SimpleNet(nn.Module):
         x = self.fc3(x)
         return x
 
-def create_mini_batches(data, batch_size):
-    batches = [data[k:k + batch_size] for k in range(0, len(data), batch_size)]
-    torch_batches = []
-    for mini_batch in batches:
-        mini_batch_obs = []
-        mini_batch_labels = []
-        for pair in mini_batch:
-            x,y = pair
-            mini_batch_obs.append(x)
-            mini_batch_labels.append(y)
-        torch_batches.append((torch.from_numpy(np.array(mini_batch_obs)), torch.from_numpy(np.array(mini_batch_labels))))
-        return torch_batches
+training_data = mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode)
+test_data = mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode)
+train_x = [x[0] for x in training_data]
+train_y = [x[1] for x in training_data]
+training_data = list(zip(train_x, train_y))
 
-
-train_data_path = "/home/jedrzej/Desktop/Machine_learning/train.csv"
-test_data_path = "/home/jedrzej/Desktop/Machine_learning/test.csv"
-
-training_data = pd.read_csv(train_data_path)
-test_data = pd.read_csv(test_data_path)
-
-y_train = np.array(training_data["label"])
-x_train = np.array(training_data.drop(labels = ["label"], axis=1))
-
-# po co zamieniac z float64 na float32?
-x_train = x_train.astype("float32")
-
-x_test = np.array(test_data)
-x_test = x_test.astype("float32")
-
-y_train = keras.utils.to_categorical(y_train, 10)
-
-training_data = list(zip(x_train,y_train))
-test_data = x_test
-losses = []
 net = SimpleNet()
 criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
 epochs = 500
 
+train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
+test_iter = iter(test_loader)
+train_iter = iter(train_loader)
+data, labels = next(train_iter)
+# print(data.shape, "\n\n\n")
+# print(labels.shape)
+n = 0
+
+
+losses = []
 for epoch in range(epochs):
     running_loss = 0.0
-    np.random.shuffle(training_data)
-    batched_training_data = create_mini_batches(training_data, batch_size)
-    for x_batch, y_batch in batched_training_data:
-        print(x_batch.shape)
-        print(y_batch.shape)
+    train_iter = iter(train_loader)
+    data, labels = next(train_iter)
+    data = torch.split(data, split_size_or_sections=1)
+    labels = torch.split(labels,split_size_or_sections=1)
+    batched_data = zip(data, labels)
+    for x_batch, y_batch in batched_data:
+        # print(x_batch.shape)
+        # print(y_batch.shape)
+
         # forward pass
         preds = net(x_batch)
 
@@ -79,32 +72,28 @@ for epoch in range(epochs):
         optimizer.zero_grad()
         loss.backward()
 
-        # Update parameters
+        # update parameters
         optimizer.step()
 
-        # Print progress
+        # print progress
         running_loss += loss.item()
 
     if epoch % 10 == 0:
-        print("Epoch [%d] Loss: %.3f" % (epoch, running_loss))
+        print("Epoch: {epoch}, Loss: {loss}".format(epoch=epoch, loss=running_loss))
         losses.append(running_loss)
 
 print ("\n ### Finished Training ### \n")
 
-torch_test_data = []
-for x in test_data:
-    torch_test_data.append(torch.from_numpy(x))
-        
-with torch.no_grad():
-    imgid = []
-    labels = []
-    image_num = 1
-    for x in torch_test_data:
-        prediction = net(x)
-        max_value, predicted_label = torch.max(prediction.data,0)
-        imgid.append(image_num)
-        labels.append(int(predicted_label))
-        image_num += 1
+# with torch.no_grad():
+#     imgid = []
+#     labels = []
+#     image_num = 1
+#     for x, y in test_data:
+#         prediction = net(x)
+#         max_value, predicted_label = torch.max(prediction.data,0)
+#         imgid.append(image_num)
+#         labels.append(int(predicted_label))
+#         image_num += 1
 
 figure, axes = plt.subplots(figsize=(12.8, 14.4))
 axes.plot(range(0,epochs,10), losses, color="red")
