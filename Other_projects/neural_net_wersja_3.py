@@ -32,9 +32,6 @@ class SimpleNet(nn.Module):
 
 training_data = mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode)
 test_data = mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode)
-train_x = [x[0] for x in training_data]
-train_y = [x[1] for x in training_data]
-training_data = list(zip(train_x, train_y))
 
 net = SimpleNet()
 criterion = nn.MSELoss(reduction="mean")
@@ -44,26 +41,11 @@ epochs = 500
 
 train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
-test_iter = iter(test_loader)
-train_iter = iter(train_loader)
-data, labels = next(train_iter)
-# print(data.shape, "\n\n\n")
-# print(labels.shape)
-n = 0
-
 
 losses = []
 for epoch in range(epochs):
     running_loss = 0.0
-    train_iter = iter(train_loader)
-    data, labels = next(train_iter)
-    data = torch.split(data, split_size_or_sections=1)
-    labels = torch.split(labels,split_size_or_sections=1)
-    batched_data = zip(data, labels)
-    for x_batch, y_batch in batched_data:
-        # print(x_batch.shape)
-        # print(y_batch.shape)
-
+    for x_batch, y_batch in iter(train_loader):
         # forward pass
         preds = net(x_batch)
 
