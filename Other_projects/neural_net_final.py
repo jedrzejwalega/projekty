@@ -79,3 +79,5 @@ with torch.no_grad():
         prediction = net(x)
         max_value, predicted_label = torch.max(prediction.data,0)
         
+# Cuda - 1051s
+# No cuda - 1946s 
