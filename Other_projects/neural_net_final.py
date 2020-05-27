@@ -30,15 +30,11 @@ class SimpleNet(nn.Module):
         x = self.fc3(x)
         return x
 
-use_cuda = torch.cuda.is_available()
-print(use_cuda)
-device = torch.device("cuda" if use_cuda else "cpu")
-print(device)
 
 training_data = list(mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
 test_data = list(mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
 
-net = SimpleNet().to(device)
+net = SimpleNet()
 criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
@@ -54,7 +50,6 @@ for epoch in range(epochs):
     running_loss = 0.0
     train_iter = iter(train_loader)
     for x_batch, y_batch in train_iter:
-            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
             # forward pass
             preds = net(x_batch)
 
@@ -81,7 +76,6 @@ print(stop - start)
 test_iter = iter(test_loader)
 with torch.no_grad():
     for x, y in test_loader:
-        x, y = x.to(device), y.to(device)
         prediction = net(x)
         max_value, predicted_label = torch.max(prediction.data,0)
         
