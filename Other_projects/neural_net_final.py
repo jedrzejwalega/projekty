@@ -4,11 +4,11 @@ import csv
 import keras
 import torch 
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
 import matplotlib.pyplot as plt
 from torchvision.datasets import mnist
 from torchvision import transforms
+import timeit
 
 
 def one_hot_encode(data: torch.utils.data.Dataset):
@@ -25,15 +25,20 @@ class SimpleNet(nn.Module):
         self.fc3 = nn.Linear(64, 10)
 
     def forward(self, x):
-        x = F.sigmoid(self.fc1(x))
-        x = F.sigmoid(self.fc2(x))
+        x = torch.sigmoid(self.fc1(x))
+        x = torch.sigmoid(self.fc2(x))
         x = self.fc3(x)
         return x
+
+use_cuda = torch.cuda.is_available()
+print(use_cuda)
+device = torch.device("cuda" if use_cuda else "cpu")
+print(device)
 
 training_data = list(mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
 test_data = list(mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
 
-net = SimpleNet()
+net = SimpleNet().to(device)
 criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
@@ -41,13 +46,15 @@ epochs = 500
 
 train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=len(test_data), shuffle=False)
-test_iter = iter(test_loader)
+
+start = timeit.default_timer()
 
 losses = []
 for epoch in range(epochs):
     running_loss = 0.0
     train_iter = iter(train_loader)
     for x_batch, y_batch in train_iter:
+            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
             # forward pass
             preds = net(x_batch)
 
@@ -67,10 +74,14 @@ for epoch in range(epochs):
         losses.append(running_loss)
 
 print ("\n ### Finished Training ### \n")
+stop = timeit.default_timer()
+print(stop - start)
 
 # Testing
+test_iter = iter(test_loader)
 with torch.no_grad():
-    for x, y in test_data:
+    for x, y in test_loader:
+        x, y = x.to(device), y.to(device)
         prediction = net(x)
         max_value, predicted_label = torch.max(prediction.data,0)
         
