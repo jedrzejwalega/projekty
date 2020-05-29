@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
-from torchvision.datasets import mnist
+from torchvision.datasets import cifar
 from torchvision import transforms
 import timeit
 
@@ -20,7 +20,7 @@ def flatten_vector(data: torch.utils.data.Dataset):
 class SimpleNet(nn.Module):
     def __init__(self):
         super(SimpleNet, self).__init__()
-        self.fc1 = nn.Linear(784, 256)
+        self.fc1 = nn.Linear(entry_len, 256)
         self.fc2 = nn.Linear(256, 64)
         self.fc3 = nn.Linear(64, 10)
 
@@ -30,11 +30,15 @@ class SimpleNet(nn.Module):
         x = self.fc3(x)
         return x
 
+use_cuda = torch.cuda.is_available()
+device = torch.device("cuda" if use_cuda else "cpu")
 
-training_data = list(mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
-test_data = list(mnist.MNIST("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
+training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
+test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
 
-net = SimpleNet()
+entry_len = training_data[0][0].shape[0]
+
+net = SimpleNet().to(device)
 criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
@@ -50,6 +54,7 @@ for epoch in range(epochs):
     running_loss = 0.0
     train_iter = iter(train_loader)
     for x_batch, y_batch in train_iter:
+            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
             # forward pass
             preds = net(x_batch)
 
@@ -76,8 +81,13 @@ print(stop - start)
 test_iter = iter(test_loader)
 with torch.no_grad():
     for x, y in test_loader:
+        x, y = x.to(device), y.to(device)
         prediction = net(x)
         max_value, predicted_label = torch.max(prediction.data,0)
-        
-# Cuda - 1051s
-# No cuda - 1946s 
+
+figure, axes = plt.subplots(figsize=(12.8, 14.4))
+axes.plot(range(0,epochs,10), losses, color="red")
+plt.title("Loss change in model training", fontsize=18)
+axes.set_xlabel("Epochs", fontsize=15)
+axes.set_ylabel("Loss", fontsize=15)
+plt.show()
