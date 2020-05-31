@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from torchvision.datasets import cifar
 from torchvision import transforms
 import timeit
+from math import ceil
 
 
 def one_hot_encode(data: torch.utils.data.Dataset):
@@ -43,9 +44,10 @@ criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
 epochs = 500
+batch_size_test = 1000
 
 train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
-test_loader = torch.utils.data.DataLoader(test_data, batch_size=len(test_data), shuffle=False)
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size_test, shuffle=False)
 
 start = timeit.default_timer()
 
@@ -78,16 +80,27 @@ stop = timeit.default_timer()
 print(stop - start)
 
 # Testing
+testing_loss = []
 test_iter = iter(test_loader)
 with torch.no_grad():
     for x, y in test_loader:
         x, y = x.to(device), y.to(device)
         prediction = net(x)
+        loss = criterion(prediction, y).item()
+        testing_loss.append(loss)
         max_value, predicted_label = torch.max(prediction.data,0)
 
 figure, axes = plt.subplots(figsize=(12.8, 14.4))
 axes.plot(range(0,epochs,10), losses, color="red")
 plt.title("Loss change in model training", fontsize=18)
 axes.set_xlabel("Epochs", fontsize=15)
+axes.set_ylabel("Loss", fontsize=15)
+plt.show()
+
+figure, axes = plt.subplots(figsize=(12.8, 14.4))
+axes.scatter(range(ceil(len(test_data)/batch_size_test)), testing_loss, color="red")
+plt.title("Loss change in model testing", fontsize=18)
+axes.set_ylim([0, max(testing_loss) * 1.2])
+axes.set_xlabel("Batch", fontsize=15)
 axes.set_ylabel("Loss", fontsize=15)
 plt.show()
