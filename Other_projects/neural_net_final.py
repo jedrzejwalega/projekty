@@ -43,10 +43,10 @@ net = SimpleNet().to(device)
 criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
-epochs = 500
+epochs = 20
 
 train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
-test_loader = torch.utils.data.DataLoader(test_data, batch_size=len(test_data), shuffle=False)
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
 
 start = timeit.default_timer()
 
@@ -69,15 +69,20 @@ for epoch in range(epochs):
             optimizer.step()
 
             # print progress
+            print("\nTraining loss: ", loss.item())
             running_loss += loss.item()
+            print("\nTraining running loss: ", running_loss)
     
     running_loss_test = 0.0
     test_iter = iter(test_loader)
     for x_test, y_test in test_iter:
         x_test, y_test = x_test.to(device), y_test.to(device)
         predictions = net(x_test)
-        testing_loss = criterion(predictions, y_test).item()
+        testing_loss = criterion(predictions, y_test)
+        print("\nTesting loss: ", testing_loss.item())
         running_loss_test += testing_loss
+        print("\nTesting running loss: ", running_loss_test.item())
+
 
     if epoch % 10 == 0:
         print("Epoch: {epoch}, Loss: {loss}".format(epoch=epoch, loss=running_loss))
