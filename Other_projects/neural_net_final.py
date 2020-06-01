@@ -40,7 +40,7 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 entry_len = training_data[0][0].shape[0]
 
 net = SimpleNet().to(device)
-criterion = nn.MSELoss(reduction="mean")
+criterion = nn.MSELoss(reduction="sum")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
 epochs = 20
@@ -71,7 +71,7 @@ for epoch in range(epochs):
 
                 # print progress
                 running_loss_count += batch_size
-                running_loss_sum += loss.item() * batch_size
+                running_loss_sum += loss.item()
     running_loss_mean = running_loss_sum/running_loss_count
     losses.append(running_loss_mean)
     print(f"In epoch {epoch}: Testing loss mean: {running_loss_mean}")
@@ -85,8 +85,8 @@ for epoch in range(epochs):
             predictions = net(x_test)
             testing_loss = criterion(predictions, y_test)
             running_loss_test_count += batch_size
-            running_loss_test_sum += testing_loss.item() * batch_size
-        running_loss_test_mean = running_loss_test_sum / running_loss_test_count
+            running_loss_test_sum += testing_loss.item()
+        running_loss_test_mean = running_loss_test_sum / 50000
         testing_losses.append(running_loss_test_mean)
     print(f"In epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
 
