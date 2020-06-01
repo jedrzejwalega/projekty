@@ -53,66 +53,56 @@ start = timeit.default_timer()
 losses = []
 testing_losses = []
 for epoch in range(epochs):
-    running_loss = 0.0
+    running_loss_count = 0.0
+    running_loss_sum = 0.0
     train_iter = iter(train_loader)
     for x_batch, y_batch in train_iter:
-            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-            # forward pass
-            preds = net(x_batch)
+                x_batch, y_batch = x_batch.to(device), y_batch.to(device)
+                # forward pass
+                preds = net(x_batch)
 
-            # backward pass
-            loss = criterion(preds, y_batch)
-            optimizer.zero_grad()
-            loss.backward()
+                # backward pass
+                loss = criterion(preds, y_batch)
+                optimizer.zero_grad()
+                loss.backward()
 
-            # update parameters
-            optimizer.step()
+                # update parameters
+                optimizer.step()
 
-            # print progress
-            print("\nTraining loss: ", loss.item())
-            running_loss += loss.item()
-            print("\nTraining running loss: ", running_loss)
-    
-    running_loss_test = 0.0
+                # print progress
+                running_loss_count += batch_size
+                running_loss_sum += loss.item() * batch_size
+    running_loss_mean = running_loss_sum/running_loss_count
+    losses.append(running_loss_mean)
+    print(f"In epoch {epoch}: Testing loss mean: {running_loss_mean}")
+
+    running_loss_test_count = 0.0
+    running_loss_test_sum = 0.0
     test_iter = iter(test_loader)
-    for x_test, y_test in test_iter:
-        x_test, y_test = x_test.to(device), y_test.to(device)
-        predictions = net(x_test)
-        testing_loss = criterion(predictions, y_test)
-        print("\nTesting loss: ", testing_loss.item())
-        running_loss_test += testing_loss
-        print("\nTesting running loss: ", running_loss_test.item())
-
-
-    if epoch % 10 == 0:
-        print("Epoch: {epoch}, Loss: {loss}".format(epoch=epoch, loss=running_loss))
-        losses.append(running_loss)
-        testing_losses.append(running_loss_test)
+    with torch.no_grad():
+        for x_test, y_test in test_iter:
+            x_test, y_test = x_test.to(device), y_test.to(device)
+            predictions = net(x_test)
+            testing_loss = criterion(predictions, y_test)
+            running_loss_test_count += batch_size
+            running_loss_test_sum += testing_loss.item() * batch_size
+        running_loss_test_mean = running_loss_test_sum / running_loss_test_count
+        testing_losses.append(running_loss_test_mean)
+    print(f"In epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
 
 print ("\n ### Finished Training ### \n")
 stop = timeit.default_timer()
 print(stop - start)
 
-# # Testing
-# testing_loss = []
-# test_iter = iter(test_loader)
-# with torch.no_grad():
-#     for x, y in test_loader:
-#         x, y = x.to(device), y.to(device)
-#         prediction = net(x)
-#         loss = criterion(prediction, y).item()
-#         testing_loss.append(loss)
-#         max_value, predicted_label = torch.max(prediction.data,0)
-
 figure, axes = plt.subplots(figsize=(12.8, 14.4))
-axes.plot(range(0,epochs,10), losses, color="red")
+axes.plot(range(epochs), losses, color="red")
 plt.title("Loss change in model training", fontsize=18)
 axes.set_xlabel("Epochs", fontsize=15)
 axes.set_ylabel("Loss", fontsize=15)
 plt.show()
 
 figure, axes = plt.subplots(figsize=(12.8, 14.4))
-axes.plot(range(0, epochs, 10), testing_losses, color="red")
+axes.plot(range(epochs), testing_losses, color="red")
 plt.title("Loss change in model testing", fontsize=18)
 axes.set_xlabel("Epochs", fontsize=15)
 axes.set_ylabel("Loss", fontsize=15)
