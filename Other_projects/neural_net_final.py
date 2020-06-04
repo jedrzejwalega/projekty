@@ -40,10 +40,10 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 entry_len = training_data[0][0].shape[0]
 
 net = SimpleNet().to(device)
-criterion = nn.MSELoss(reduction="sum")
+criterion = nn.MSELoss(reduction="mean")
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 batch_size = 128
-epochs = 20
+epochs = 50000
 
 train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
@@ -71,7 +71,7 @@ for epoch in range(epochs):
 
                 # print progress
                 running_loss_count += batch_size
-                running_loss_sum += loss.item()
+                running_loss_sum += loss.item() * batch_size
     running_loss_mean = running_loss_sum/running_loss_count
     losses.append(running_loss_mean)
     print(f"In epoch {epoch}: Testing loss mean: {running_loss_mean}")
@@ -85,8 +85,8 @@ for epoch in range(epochs):
             predictions = net(x_test)
             testing_loss = criterion(predictions, y_test)
             running_loss_test_count += batch_size
-            running_loss_test_sum += testing_loss.item()
-        running_loss_test_mean = running_loss_test_sum / 50000
+            running_loss_test_sum += testing_loss.item() * batch_size
+        running_loss_test_mean = running_loss_test_sum / running_loss_test_count
         testing_losses.append(running_loss_test_mean)
     print(f"In epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
 
@@ -96,14 +96,8 @@ print(stop - start)
 
 figure, axes = plt.subplots(figsize=(12.8, 14.4))
 axes.plot(range(epochs), losses, color="red")
+axes.plot(range(epochs), testing_losses, color="blue")
 plt.title("Loss change in model training", fontsize=18)
-axes.set_xlabel("Epochs", fontsize=15)
-axes.set_ylabel("Loss", fontsize=15)
-plt.show()
-
-figure, axes = plt.subplots(figsize=(12.8, 14.4))
-axes.plot(range(epochs), testing_losses, color="red")
-plt.title("Loss change in model testing", fontsize=18)
 axes.set_xlabel("Epochs", fontsize=15)
 axes.set_ylabel("Loss", fontsize=15)
 plt.show()
