@@ -48,7 +48,7 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-learning_sets = [[8, 1, 0.5], [5, 1, 0.5], [2, 1, 0.5]]
+learning_sets = [[8, 1, 0.5], [5, 0.5, 0.1], [2, 1.2, 0.3]]
 criterion = nn.MSELoss(reduction="mean")
 batch_size = 128
 epochs = 60
@@ -112,11 +112,12 @@ for rates in learning_sets:
                 running_loss_test_count += batch_size
                 running_loss_test_sum += testing_loss.item() * batch_size
             running_loss_test_mean = running_loss_test_sum / running_loss_test_count
-            testing_losses.append(running_loss_test_mean)
+            Ntesting_losses.append(running_loss_test_mean)
         print(f"In epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
 
     stop = timeit.default_timer()
     print (f"\n ### Finished Training in {stop - start} ### \n")
+
     axes.plot(range(epochs), losses, color=color_map(n), label=f"Training lr = {rates}")
     axes.plot(range(epochs), testing_losses, color=np.array(color_map(n)) * 0.6, label=f"Testing lr = {rates}")
     n += 1
