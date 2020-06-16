@@ -126,12 +126,14 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
     return minimal_losses
 
 def find_max_lr(upper_limit: int):
+    
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=128, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
     
     # Note - consider iterating from 0 to upper_limit, not backwardsS
     for lr in range(upper_limit, 0, -1):
+        torch.manual_seed(1)
         net = SimpleNet().to(device)
         optimizer = optim.SGD(net.parameters(), lr=lr, momentum=0.9)
         losses = []
@@ -152,6 +154,7 @@ def find_max_lr(upper_limit: int):
 
             # print progress
             losses.append(loss.item())
+            # print(loss.item())
 
         test_iter = iter(test_loader)
         with torch.no_grad():
@@ -160,6 +163,7 @@ def find_max_lr(upper_limit: int):
                 predictions = net(x_test)
                 testing_loss = criterion(predictions, y_test)
                 losses.append(testing_loss.item())
+                # print(loss.item())
 
         if isnan(losses).any() == False and float("inf") not in losses:
             return lr
@@ -174,14 +178,8 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-# for a in [19, 10, 1, 0.1]:
-#     for r in [0.03, 0.1, 0.3]:
-#         minimal_losses = train_and_test_model(learning_sets=[[a, a * r, a * r * r]], batch_size=128, epochs=60)
-#         print([a, a*r, a*r*r], f" - Minimal losses (training, testing): {minimal_losses}")
+for a in [18, 10, 1, 0.1]:
+    for r in [0.03, 0.1, 0.3]:
+        minimal_losses = train_and_test_model(learning_sets=[[a, a * r, a * r * r]], batch_size=128, epochs=60)
+        print([a, a*r, a*r*r], f" - Minimal losses (training, testing): {minimal_losses}")
 
-print(find_max_lr(23)) # -> max lr = 19
-print(find_max_lr(19)) # -> max lr = 19
-print(find_max_lr(20)) # -> max lr = 18
-print(find_max_lr(21)) # max lr = 19
-# Note - Non-reproducible results, result that works on train_and_test_model() is 18. 
-# Possible cause - DataLoader shuffles data at every epoch, so despite the same seed, data is shuffled different number of times, depending on input upper_limit.
