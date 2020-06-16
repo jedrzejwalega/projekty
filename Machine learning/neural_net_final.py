@@ -125,19 +125,17 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
     plt.show()
     return minimal_losses
 
-def find_max_lr(upper_limit: int):
+def find_max_lr(step:float=1) -> int:
     
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=128, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
-    
-    # Note - consider iterating from 0 to upper_limit, not backwardsS
-    for lr in range(upper_limit, 0, -1):
+    lr = 1
+    while True:
         torch.manual_seed(1)
         net = SimpleNet().to(device)
         optimizer = optim.SGD(net.parameters(), lr=lr, momentum=0.9)
         losses = []
-        print("Learning rate: ", get_lr(optimizer))
         train_iter = iter(train_loader)
         for x_batch, y_batch in train_iter:
             x_batch, y_batch = x_batch.to(device), y_batch.to(device)
@@ -165,9 +163,10 @@ def find_max_lr(upper_limit: int):
                 losses.append(testing_loss.item())
                 # print(loss.item())
 
-        if isnan(losses).any() == False and float("inf") not in losses:
-            return lr
-
+        if isnan(losses).any() == True or float("inf") in losses:
+            return lr - 1
+        
+        lr += step
 
 torch.manual_seed(1)
 use_cuda = torch.cuda.is_available()
@@ -178,8 +177,11 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-for a in [18, 10, 1, 0.1]:
-    for r in [0.03, 0.1, 0.3]:
-        minimal_losses = train_and_test_model(learning_sets=[[a, a * r, a * r * r]], batch_size=128, epochs=60)
-        print([a, a*r, a*r*r], f" - Minimal losses (training, testing): {minimal_losses}")
+max_rate = find_max_lr()
+print(max_rate)
+
+# for a in [18, 10, 1, 0.1]:
+#     for r in [0.03, 0.1, 0.3]:
+#         minimal_losses = train_and_test_model(learning_sets=[[a, a * r, a * r * r]], batch_size=128, epochs=60)
+#         print([a, a*r, a*r*r], f" - Minimal losses (training, testing): {minimal_losses}")
 
