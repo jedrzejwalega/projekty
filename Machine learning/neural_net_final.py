@@ -59,6 +59,7 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
     
     minimal_losses = []
     for rates in learning_sets:
+        torch.manual_seed(1)
         learning_rates = iter(rates)
         net = SimpleNet().to(device)
         optimizer = optim.SGD(net.parameters(), lr=next(learning_rates), momentum=0.9)
@@ -83,7 +84,6 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
                 optimizer.step()
 
                 # print progress
-                print(loss.item())
                 running_loss_count += batch_size
                 running_loss_sum += loss.item() * batch_size
 
@@ -104,7 +104,6 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
                     testing_loss = criterion(predictions, y_test)
                     running_loss_test_count += batch_size
                     running_loss_test_sum += testing_loss.item() * batch_size
-                    print(testing_loss.item())
 
                 running_loss_test_mean = running_loss_test_sum / running_loss_test_count 
                 testing_losses.append(running_loss_test_mean)
@@ -115,14 +114,17 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
         
         min_training_loss = min(losses)
         min_testing_loss = min(testing_losses)
-        axes.plot(range(epochs), losses, color=color_map(n), label=f"Training lr={rates}, min={min_training_loss}")
-        axes.plot(range(epochs), testing_losses, color=np.array(color_map(n)) * 0.6, label=f"Testing lr={min_testing_loss}, min={min(testing_losses)}")
-        minimal_losses.append((min_training_loss, min_testing_loss))
+        axes.plot(range(epochs), losses, color=color_map(n), label=f"Lr={rates}, Training min={min_training_loss}")
+        plt.title(f"Learning rates = {rates}")
+        axes.plot(range(epochs), testing_losses, color=np.array(color_map(n)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}")
+        minimal_losses.append((rates, min_training_loss, min_testing_loss))
         n += 1
+    plt.title("Learning rates comparison")
     plt.yscale(value="log")
     plt.grid()
-    axes.legend()
-    plt.show()
+    axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
+    plt.savefig(f"/home/jedrzej/Desktop/Machine_learning/Plots/Lr_comparison_CIFAR_10.png", bbox_inches="tight")
+    plt.close()
     return minimal_losses
 
 def find_max_lr(step:float=1) -> int:
@@ -152,7 +154,6 @@ def find_max_lr(step:float=1) -> int:
 
             # print progress
             losses.append(loss.item())
-            # print(loss.item())
 
         test_iter = iter(test_loader)
         with torch.no_grad():
@@ -161,14 +162,13 @@ def find_max_lr(step:float=1) -> int:
                 predictions = net(x_test)
                 testing_loss = criterion(predictions, y_test)
                 losses.append(testing_loss.item())
-                # print(loss.item())
 
         if isnan(losses).any() == True or float("inf") in losses:
             return lr - 1
         
         lr += step
 
-torch.manual_seed(1)
+
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
 
@@ -177,11 +177,8 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-max_rate = find_max_lr()
-print(max_rate)
+basic_rates = [18,10,1,0.1]
+rate_modifiers = [0.03, 0.1, 0.3]
+modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
 
-# for a in [18, 10, 1, 0.1]:
-#     for r in [0.03, 0.1, 0.3]:
-#         minimal_losses = train_and_test_model(learning_sets=[[a, a * r, a * r * r]], batch_size=128, epochs=60)
-#         print([a, a*r, a*r*r], f" - Minimal losses (training, testing): {minimal_losses}")
-
+minimal_losses = train_and_test_model(learning_sets=modified_rates, batch_size=128, epochs=60)
