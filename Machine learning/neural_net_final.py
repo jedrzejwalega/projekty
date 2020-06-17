@@ -114,9 +114,11 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
         
         min_training_loss = min(losses)
         min_testing_loss = min(testing_losses)
-        axes.plot(range(epochs), losses, color=color_map(n), label=f"Lr={rates}, Training min={min_training_loss}")
-        plt.title(f"Learning rates = {rates}")
-        axes.plot(range(epochs), testing_losses, color=np.array(color_map(n)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}")
+        min_training_local_losses = [min(losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
+        min_testing_local_losses = [min(testing_losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
+        axes.plot(range(epochs), losses, color=color_map(n), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
+        plt.title("CIFAR-10 learning rates comparison")
+        axes.plot(range(epochs), testing_losses, color=np.array(color_map(n)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
         minimal_losses.append((rates, min_training_loss, min_testing_loss))
         n += 1
     plt.title("Learning rates comparison")
