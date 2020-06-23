@@ -184,3 +184,4 @@ rate_modifiers = [0.03, 0.1, 0.3]
 modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
 
 minimal_losses = train_and_test_model(learning_sets=modified_rates, batch_size=128, epochs=60)
+print(minimal_losses)
