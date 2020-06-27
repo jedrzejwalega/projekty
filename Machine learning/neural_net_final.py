@@ -42,22 +42,16 @@ class SimpleNet(nn.Module):
         x = self.fc3(x)
         return x
 
-def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
+def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs, file_name:str):
+    lr = [x[0] if len(x) == 1 else x[1] for x in learning_sets]
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
 
-    color_map = plt.cm.get_cmap('rainbow', len(learning_sets))
-    n=0
-
-    figure, axes = plt.subplots(figsize=(12.8, 14.4))
-    plt.title("Loss change in model training", fontsize=18)
-    axes.set_xlabel("Epochs", fontsize=15)
-    axes.set_ylabel("Loss (log10)", fontsize=15)
-
     start = timeit.default_timer()
-    
-    minimal_losses = []
+    training_losses_minimal = []
+    testing_losses_minimal = []
+
     for rates in learning_sets:
         torch.manual_seed(1)
         learning_rates = iter(rates)
@@ -66,9 +60,13 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
         losses = []
         testing_losses = []
         for epoch in range(epochs):
-            print("Learning rate: ", get_lr(optimizer))
-            running_loss_count = 0.0
-            running_loss_sum = 0.0
+            print(epoch)
+            if epoch % 2 == 0 and epoch > 0:
+                adjust_lr(optimizer, learning_rates)
+                losses= []
+                testing_losses = []
+            lr = get_lr(optimizer)
+            print("Learning rate: ", lr)
             train_iter = iter(train_loader)
             for x_batch, y_batch in train_iter:
                 x_batch, y_batch = x_batch.to(device), y_batch.to(device)
@@ -84,50 +82,30 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size, epochs):
                 optimizer.step()
 
                 # print progress
-                running_loss_count += batch_size
-                running_loss_sum += loss.item() * batch_size
+                # print(loss.item())
+                losses.append(loss.item())
 
-            running_loss_mean = running_loss_sum/running_loss_count
-            losses.append(running_loss_mean)
-            print(f"In epoch {epoch}: Training loss mean: {running_loss_mean}")
-
-            if epoch % 20 == 0 and epoch > 0:
-                adjust_lr(optimizer, learning_rates)
-
-            running_loss_test_count = 0.0
-            running_loss_test_sum = 0.0
             test_iter = iter(test_loader)
             with torch.no_grad():
                 for x_test, y_test in test_iter:
                     x_test, y_test = x_test.to(device), y_test.to(device)
                     predictions = net(x_test)
                     testing_loss = criterion(predictions, y_test)
-                    running_loss_test_count += batch_size
-                    running_loss_test_sum += testing_loss.item() * batch_size
-
-                running_loss_test_mean = running_loss_test_sum / running_loss_test_count 
-                testing_losses.append(running_loss_test_mean)
-            print(f"In epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
+                    testing_losses.append(testing_loss.item())
+                    # print(testing_loss.item())
 
         stop = timeit.default_timer()
         print (f"\n ### Finished Training in {stop - start} ### \n")
         
         min_training_loss = min(losses)
         min_testing_loss = min(testing_losses)
-        min_training_local_losses = [min(losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
-        min_testing_local_losses = [min(testing_losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
-        axes.plot(range(epochs), losses, color=color_map(n), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
-        plt.title("CIFAR-10 learning rates comparison")
-        axes.plot(range(epochs), testing_losses, color=np.array(color_map(n)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
-        minimal_losses.append((rates, min_training_loss, min_testing_loss))
-        n += 1
-    plt.title("Learning rates comparison")
-    plt.yscale(value="log")
-    plt.grid()
-    axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
-    plt.savefig(f"/home/jedrzej/Desktop/Machine_learning/Plots/Lr_comparison_CIFAR_10.png", bbox_inches="tight")
-    plt.close()
-    return minimal_losses
+        training_losses_minimal.append((lr, min_training_loss))
+        testing_losses_minimal.append((lr, min_testing_loss))
+        print(losses, "\n\n", testing_losses)
+
+    table = pd.DataFrame(data={"Learning rate":[x[0] for x in training_losses_minimal], "Minimal training loss":[x[1] for x in training_losses_minimal], "Minimal testing loss":[x[1] for x in testing_losses_minimal]})
+    table.to_csv(file_name)
+    return min(training_losses_minimal, key=lambda x:x[1]), min(testing_losses_minimal, key=lambda x:x[1])
 
 def find_max_lr(step:float=1) -> int:
     
@@ -179,9 +157,13 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-basic_rates = [18,10,1,0.1]
-rate_modifiers = [0.03, 0.1, 0.3]
-modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
+learning_rates = list(np.arange(0.005, 0.405, 0.005))
+learning_rates = [[np.round(x, decimals=3)] for x in learning_rates]
+print(learning_rates)
 
-minimal_losses = train_and_test_model(learning_sets=modified_rates, batch_size=128, epochs=60)
-print(minimal_losses)
+minimal_rate = train_and_test_model(learning_sets=learning_rates, batch_size=128, epochs=2, file_name="/home/jedrzej/Desktop/learning_rates_2_epochs.csv")[0][0]
+print("Minimal rate: ", minimal_rate)
+new_learning_rates = [[minimal_rate] + x for x in learning_rates if x[0] <= minimal_rate]
+print(new_learning_rates)
+print(train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs=4, file_name="/home/jedrzej/Desktop/learning_rates_4_epochs.csv"))
+
