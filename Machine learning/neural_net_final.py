@@ -79,7 +79,8 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
 
             stop = timeit.default_timer()
             print (f"\n ### Finished Training in {stop - start} ### \n")
-            
+        
+        print("First iter")
         all_epochs = sum(epoch_limits) + sum(extras)
         min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses = calculate_min_losses(losses, testing_losses, all_epochs, rates)
         minimal_losses.append((rates, min_training_loss, min_testing_loss))
