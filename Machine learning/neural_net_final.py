@@ -15,20 +15,6 @@ from typing import List
 from numpy import isnan
 
 
-def adjust_lr(optimizer, learning_rates):
-    for param_group in optimizer.param_groups:
-        param_group["lr"] = next(learning_rates)
-
-def get_lr(optimizer):
-    for param_group in optimizer.param_groups:
-        return param_group['lr']
-
-def one_hot_encode(data: torch.utils.data.Dataset):
-    return keras.utils.to_categorical(data, 10)
-
-def flatten_vector(data: torch.utils.data.Dataset):
-    return torch.flatten(data)
-
 class SimpleNet(nn.Module):
     def __init__(self):
         super(SimpleNet, self).__init__()
@@ -42,25 +28,37 @@ class SimpleNet(nn.Module):
         x = self.fc3(x)
         return x
 
-def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs:int):
+
+def adjust_lr(optimizer, new_lr):
+    for param_group in optimizer.param_groups:
+        param_group["lr"] = new_lr
+
+def get_lr(optimizer):
+    for param_group in optimizer.param_groups:
+        return param_group['lr']
+
+def one_hot_encode(data: torch.utils.data.Dataset):
+    return keras.utils.to_categorical(data, 10)
+
+def flatten_vector(data: torch.utils.data.Dataset):
+    return torch.flatten(data)
+
+def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs:int, epochs_per_lr:List[List[float]], extra_epochs:List[List[float]]):
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
 
     color_map = plt.cm.get_cmap('rainbow', len(learning_sets))
     color_map_index = 1
-
-    figure, axes = plt.subplots(figsize=(12.8, 14.4))
-    plt.title("Loss change in model training", fontsize=18)
-    axes.set_xlabel("Epochs", fontsize=15)
-    axes.set_ylabel("Loss (log10)", fontsize=15)
+    figure, axes = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss (log10)")
 
     start = timeit.default_timer()
     
     minimal_losses = []
-    for rates in learning_sets:
+    for rates, epochs_for_cycle ,extras in zip(learning_sets, epochs_per_lr, extra_epochs):
         torch.manual_seed(1)
         learning_rates = iter(rates)
+        extra_learning_cycles = iter(extras)
         net = SimpleNet().to(device)
         optimizer = optim.SGD(net.parameters(), lr=next(learning_rates), momentum=0.9)
         losses = []
@@ -69,29 +67,35 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
             losses = train(net, optimizer, train_loader, losses, epoch, criterion, batch_size)
             testing_losses = test(net, test_loader, testing_losses, epoch, criterion, batch_size)
 
-            if epoch % 20 == 0 and epoch > 0:
-                adjust_lr(optimizer, learning_rates)
+            if epoch % epochs_for_cycle == 0 and epoch > 0:
+                if next(extra_learning_cycles):
+                    for extra in extra_learning_cycles:
+                        losses = train(net, optimizer, train_loader, losses, epoch, criterion, batch_size)
+                        testing_losses = test(net, test_loader, testing_losses, epoch, criterion, batch_size)
+                adjust_lr(optimizer, next(learning_rates))
 
         stop = timeit.default_timer()
         print (f"\n ### Finished Training in {stop - start} ### \n")
         
-        min_training_loss = min(losses)
-        min_testing_loss = min(testing_losses)
-        min_training_local_losses = [min(losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
-        min_testing_local_losses = [min(testing_losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
-        axes.plot(range(epochs), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
-        plt.title("CIFAR-10 learning rates comparison")
-        axes.plot(range(epochs), testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
+        min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses = calculate_min_losses(losses, testing_losses, epochs, rates)
         minimal_losses.append((rates, min_training_loss, min_testing_loss))
+        plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
         color_map_index += 1
 
-    plt.title("Learning rates comparison")
-    plt.yscale(value="log")
-    plt.grid()
     axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
     plt.savefig(f"/home/jedrzej/Desktop/Machine_learning/Plots/Lr_comparison_CIFAR_10.png", bbox_inches="tight")
     plt.close()
     return minimal_losses
+
+def set_up_plot(title, x_label_title, y_label_title):
+    figure, axes = plt.subplots(figsize=(12.8, 14.4))
+    plt.title(title, fontsize=18)
+    axes.set_xlabel(x_label_title, fontsize=15)
+    axes.set_ylabel(y_label_title, fontsize=15)
+    plt.yscale(value="log")
+    plt.grid()
+   
+    return figure, axes
 
 def train(model, optimizer, train_loader, losses, epoch, criterion, batch_size):
     print(f"Epoch {epoch} training learning rate: ", get_lr(optimizer))
@@ -136,6 +140,21 @@ def test(model, test_loader, testing_losses, epoch, criterion, batch_size):
 
     print(f"In epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
     return testing_losses
+
+def calculate_min_losses(losses, testing_losses, epochs, extras):
+    min_training_loss = min(losses)
+    min_testing_loss = min(testing_losses)
+    min_testing_local_losses = []
+    n = 0
+    for m in extras:
+        min_training_local_loss = min(losses[n:m]) 
+    min_training_local_losses = [min(losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
+    min_testing_local_losses = [min(testing_losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
+    return min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses
+
+def plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates):
+    axes.plot(range(epochs), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
+    axes.plot(range(epochs), testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
 
 def find_max_lr(step:float=1) -> int:
     
@@ -191,5 +210,5 @@ basic_rates = [18,10,1,0.1]
 rate_modifiers = [0.03, 0.1, 0.3]
 modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
 
-minimal_losses = train_and_test_model(learning_sets=modified_rates, batch_size=128, epochs=3)
+minimal_losses = train_and_test_model(learning_sets=modified_rates, batch_size=128, epochs=3, epochs_per_lr=20)
 print(minimal_losses)
