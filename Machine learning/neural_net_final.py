@@ -49,7 +49,7 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
 
-    color_map = plt.cm.get_cmap('rainbow', len(learning_sets))
+    color_map = plt.cm.get_cmap('gist_ncar', len(learning_sets))
     color_map_index = 1
     figure, axes = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss (log10)")
 
@@ -82,7 +82,7 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
         
         print("First iter")
         all_epochs = sum(epoch_limits) + sum(extras)
-        min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses = calculate_min_losses(losses, testing_losses, all_epochs, rates)
+        min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses = calculate_min_losses(losses, testing_losses, epoch_limits, rates)
         minimal_losses.append((rates, min_training_loss, min_testing_loss))
         plot_training_testing_losses(axes, all_epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
         color_map_index += 1
@@ -146,11 +146,17 @@ def test(model, test_loader, testing_losses, epoch, criterion, batch_size):
     print(f"Epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
     return testing_losses
 
-def calculate_min_losses(losses, testing_losses, epochs, rates):
+def calculate_min_losses(losses, testing_losses, epochs, extra_learning_cycles):
     min_training_loss = min(losses)
     min_testing_loss = min(testing_losses)
-    min_training_local_losses = [min(losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
-    min_testing_local_losses = [min(testing_losses[n:n + epochs//len(rates)]) for n in range(0, epochs, epochs//len(rates))]
+    min_training_local_losses = []
+    min_testing_local_losses = []
+    first_index = 0
+    for epoch_cycle in epochs:
+        min_training_local_losses.append(min(losses[first_index:first_index + epoch_cycle]))
+        min_testing_local_losses.append(min(testing_losses[first_index:first_index + epoch_cycle]))
+        first_index = epoch_cycle
+
     return min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses
 
 def plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates):
@@ -211,5 +217,5 @@ basic_rates = [18,10,1,0.1]
 rate_modifiers = [0.03, 0.1, 0.3]
 modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
 
-minimal_losses = train_and_test_model(learning_sets=[[3,2,1],[0.5,0.2,0.1]], batch_size=128, epochs_per_lr=[[2,1,3],[1,1,2]], extra_epochs=[[0,1,1], [1,2,0]])
+minimal_losses = train_and_test_model(learning_sets=[[3,2,1],[0.5,0.2,0.1],[1],[2],[3],[4],[5]], batch_size=128, epochs_per_lr=[[2,1,3],[1,1,2],[1],[2],[3],[4],[5]], extra_epochs=[[0,1,1],[1,2,0],[1],[2],[3],[4],[5]])
 print(minimal_losses)
