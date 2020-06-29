@@ -44,7 +44,7 @@ def one_hot_encode(data: torch.utils.data.Dataset):
 def flatten_vector(data: torch.utils.data.Dataset):
     return torch.flatten(data)
 
-def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs_per_lr:int, extra_epochs:List[List[float]]):
+def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs_per_lr:List[List[float]], extra_epochs:List[List[float]], path=str):
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
@@ -73,24 +73,32 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
                 losses = train(net, optimizer, train_loader, losses, epoch, criterion, batch_size)
                 testing_losses = test(net, test_loader, testing_losses, epoch, criterion, batch_size)
             new_lr = next(learning_rates)
-            print("New lr: ", new_lr)
             if new_lr:
                 adjust_lr(optimizer, new_lr)
 
             stop = timeit.default_timer()
             print (f"\n ### Finished Training in {stop - start} ### \n")
         
-        print("First iter")
+        epochs_no_extra = sum(epoch_limits)
+        losses_no_extra = losses[:epochs_no_extra]
+        testing_losses_no_extra = testing_losses[:epochs_no_extra]
+
+        min_training_loss_no_extra, min_testing_loss_no_extra = calculate_min_losses(losses_no_extra, testing_losses_no_extra)
+        minimal_losses.append((rates, min_training_loss_no_extra, min_testing_loss_no_extra))
+
+        min_training_loss, min_testing_loss = calculate_min_losses(losses, testing_losses)
+        min_training_local_losses, min_testing_local_losses = calculate_local_losses(losses, testing_losses, epoch_limits)
+        
         all_epochs = sum(epoch_limits) + sum(extras)
-        min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses = calculate_min_losses(losses, testing_losses, epoch_limits, rates)
-        minimal_losses.append((rates, min_training_loss, min_testing_loss))
         plot_training_testing_losses(axes, all_epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
         color_map_index += 1
-
+    
+    print(len(losses))
+    print(len(testing_losses))
     axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
-    plt.savefig(f"/home/jedrzej/Desktop/Machine_learning/Plots/Lr_comparison_CIFAR_10.png", bbox_inches="tight")
+    plt.savefig(path, bbox_inches="tight")
     plt.close()
-    return minimal_losses
+    return min(minimal_losses, key=lambda x:x[1])
 
 def set_up_plot(title, x_label_title, y_label_title):
     figure, axes = plt.subplots(figsize=(12.8, 14.4))
@@ -146,9 +154,12 @@ def test(model, test_loader, testing_losses, epoch, criterion, batch_size):
     print(f"Epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
     return testing_losses
 
-def calculate_min_losses(losses, testing_losses, epochs, extra_learning_cycles):
+def calculate_min_losses(losses, testing_losses):
     min_training_loss = min(losses)
     min_testing_loss = min(testing_losses)
+    return min_training_loss, min_testing_loss
+
+def calculate_local_losses(losses, testing_losses, epochs):
     min_training_local_losses = []
     min_testing_local_losses = []
     first_index = 0
@@ -157,7 +168,7 @@ def calculate_min_losses(losses, testing_losses, epochs, extra_learning_cycles):
         min_testing_local_losses.append(min(testing_losses[first_index:first_index + epoch_cycle]))
         first_index = epoch_cycle
 
-    return min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses
+    return min_training_local_losses, min_testing_local_losses
 
 def plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates):
     axes.plot(range(epochs), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
@@ -217,5 +228,7 @@ basic_rates = [18,10,1,0.1]
 rate_modifiers = [0.03, 0.1, 0.3]
 modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
 
-minimal_losses = train_and_test_model(learning_sets=[[3,2,1],[0.5,0.2,0.1],[1],[2],[3],[4],[5]], batch_size=128, epochs_per_lr=[[2,1,3],[1,1,2],[1],[2],[3],[4],[5]], extra_epochs=[[0,1,1],[1,2,0],[1],[2],[3],[4],[5]])
+minimal_losses = train_and_test_model(learning_sets=[[3,2,1],[4,5,6]], batch_size=128, epochs_per_lr=[[2,1,3],[4,5,6]], extra_epochs=[[0,1,1],[2,2,1]], path="/home/jedrzej/Desktop/wykres.png")
 print(minimal_losses)
+
+# Step 1 - find minimal learning rate for first epoch:
