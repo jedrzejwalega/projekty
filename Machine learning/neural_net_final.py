@@ -44,60 +44,58 @@ def one_hot_encode(data: torch.utils.data.Dataset):
 def flatten_vector(data: torch.utils.data.Dataset):
     return torch.flatten(data)
 
-def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs_per_lr:List[List[float]], extra_epochs:List[List[float]], path=str):
+def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs_per_lr:List[List[float]], min_by_epochs:List[List[float]], path=str):
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
 
     color_map = plt.cm.get_cmap('gist_ncar', len(learning_sets))
-    color_map_index = 1
+    color_map_index = 0
     figure, axes = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss (log10)")
 
     start = timeit.default_timer()
     
     minimal_losses = []
-    for rates, epoch_limits, extras in zip(learning_sets, epochs_per_lr, extra_epochs):
-        print(rates, epoch_limits, extras)
+    for rates, epoch_limits, epochs_of_interest in zip(learning_sets, epochs_per_lr, min_by_epochs):
+        # print(rates, epoch_limits, epochs_of_interest)
         torch.manual_seed(1)
         learning_rates = cycle(rates)
         net = SimpleNet().to(device)
         optimizer = optim.SGD(net.parameters(), lr=next(learning_rates), momentum=0.9)
         losses = []
         testing_losses = []
-        for epochs, extra_learning_cycles in zip(epoch_limits, extras):
-            print("Epochs, extra learning cycles: ", epochs, extra_learning_cycles)
+        for epochs in epoch_limits:
+            # print("Epochs: ", epochs)
             for epoch in range(epochs):
                 losses = train(net, optimizer, train_loader, losses, epoch, criterion, batch_size)
                 testing_losses = test(net, test_loader, testing_losses, epoch, criterion, batch_size)
-            for extra in range(extra_learning_cycles):
-                losses = train(net, optimizer, train_loader, losses, epoch, criterion, batch_size)
-                testing_losses = test(net, test_loader, testing_losses, epoch, criterion, batch_size)
             new_lr = next(learning_rates)
-            if new_lr:
-                adjust_lr(optimizer, new_lr)
+            adjust_lr(optimizer, new_lr)
 
-            stop = timeit.default_timer()
-            print (f"\n ### Finished Training in {stop - start} ### \n")
+        stop = timeit.default_timer()
+        # print (f"\n ### Finished Training in {stop - start} ### \n")
         
-        epochs_no_extra = sum(epoch_limits)
-        losses_no_extra = losses[:epochs_no_extra]
-        testing_losses_no_extra = testing_losses[:epochs_no_extra]
+        losses_of_interest = [losses[n] for n in epochs_of_interest]
+        testing_losses_of_interest = [testing_losses[n] for n in epochs_of_interest]
+        print("Losses: ", losses)
+        # print("Testing losses: ", testing_losses)
 
-        min_training_loss_no_extra, min_testing_loss_no_extra = calculate_min_losses(losses_no_extra, testing_losses_no_extra)
+        min_training_loss_no_extra, min_testing_loss_no_extra = calculate_min_losses(losses_of_interest, testing_losses_of_interest)
         minimal_losses.append((rates, min_training_loss_no_extra, min_testing_loss_no_extra))
 
         min_training_loss, min_testing_loss = calculate_min_losses(losses, testing_losses)
         min_training_local_losses, min_testing_local_losses = calculate_local_losses(losses, testing_losses, epoch_limits)
         
-        all_epochs = sum(epoch_limits) + sum(extras)
-        plot_training_testing_losses(axes, all_epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
+        # axes.plot(range(sum(epoch_limits)), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
+        # axes.plot(range(sum(epoch_limits)), testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
+        plot_training_testing_losses(axes, sum(epoch_limits), losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
         color_map_index += 1
     
-    print(len(losses))
-    print(len(testing_losses))
     axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
     plt.savefig(path, bbox_inches="tight")
     plt.close()
+    print(minimal_losses)
+    print("MIN: ", min(minimal_losses, key=lambda x:x[1]))
     return min(minimal_losses, key=lambda x:x[1])
 
 def set_up_plot(title, x_label_title, y_label_title):
@@ -111,7 +109,7 @@ def set_up_plot(title, x_label_title, y_label_title):
     return figure, axes
 
 def train(model, optimizer, train_loader, losses, epoch, criterion, batch_size):
-    print(f"Epoch {epoch} training learning rate: ", get_lr(optimizer))
+    # print(f"Epoch {epoch} training learning rate: ", get_lr(optimizer))
     running_loss_count = 0.0
     running_loss_sum = 0.0
     train_iter = iter(train_loader)
@@ -134,7 +132,7 @@ def train(model, optimizer, train_loader, losses, epoch, criterion, batch_size):
 
     running_loss_mean = running_loss_sum/running_loss_count
     losses.append(running_loss_mean)
-    print(f"Epoch {epoch}: Training loss mean: {running_loss_mean}")
+    # print(f"Epoch {epoch}: Training loss mean: {running_loss_mean}")
     return losses
 
 def test(model, test_loader, testing_losses, epoch, criterion, batch_size):
@@ -151,7 +149,7 @@ def test(model, test_loader, testing_losses, epoch, criterion, batch_size):
         running_loss_test_mean = running_loss_test_sum / running_loss_test_count 
         testing_losses.append(running_loss_test_mean)
 
-    print(f"Epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
+    # print(f"Epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
     return testing_losses
 
 def calculate_min_losses(losses, testing_losses):
@@ -171,6 +169,7 @@ def calculate_local_losses(losses, testing_losses, epochs):
     return min_training_local_losses, min_testing_local_losses
 
 def plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates):
+    print(f"Rates: {rates}, Losses: {losses}")
     axes.plot(range(epochs), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
     axes.plot(range(epochs), testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
 
@@ -228,7 +227,16 @@ basic_rates = [18,10,1,0.1]
 rate_modifiers = [0.03, 0.1, 0.3]
 modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
 
-minimal_losses = train_and_test_model(learning_sets=[[3,2,1],[4,5,6]], batch_size=128, epochs_per_lr=[[2,1,3],[4,5,6]], extra_epochs=[[0,1,1],[2,2,1]], path="/home/jedrzej/Desktop/wykres.png")
-print(minimal_losses)
 
 # Step 1 - find minimal learning rate for first epoch:
+learning_rates = [[x] for x in np.arange(0.1, 1.1, 0.05)]
+epochs = [[3] for x in learning_rates]
+min_by_epochs = [[0] for x in learning_rates]
+minimal_loss_part_one = train_and_test_model(learning_sets=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/wykres.png")[0][0]
+print(minimal_loss_part_one)
+
+new_learning_rates = [[minimal_loss_part_one, x] for x in np.arange(minimal_loss_part_one, 0, -0.05)]
+new_epochs = [[3, 2] for x in new_learning_rates]
+min_by_epochs = [[3] for x in new_learning_rates]
+minimal_loss_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/wykres5.png")
+print(minimal_loss_part_two)
