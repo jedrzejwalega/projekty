@@ -14,6 +14,7 @@ import timeit
 from typing import List
 from numpy import isnan
 from itertools import cycle
+from math import ceil
 
 
 class SimpleNet(nn.Module):
@@ -47,17 +48,19 @@ def flatten_vector(data: torch.utils.data.Dataset):
 def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs_per_lr:List[List[float]], min_by_epochs:List[List[float]], path=str):
     criterion = nn.MSELoss(reduction="mean")
     train_loader = torch.utils.data.DataLoader(training_data, batch_size=batch_size, shuffle=True)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
+    test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size, shuffle=False)
 
     color_map = plt.cm.get_cmap('gist_ncar', len(learning_sets))
     color_map_index = 0
     figure, axes = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss (log10)")
-
+    
     start = timeit.default_timer()
     
     minimal_losses = []
+    losses_per_epoch = ceil(len(train_loader.dataset)/batch_size/20)
+    
     for rates, epoch_limits, epochs_of_interest in zip(learning_sets, epochs_per_lr, min_by_epochs):
-        # print(rates, epoch_limits, epochs_of_interest)
+        print(rates, epoch_limits, epochs_of_interest)
         torch.manual_seed(1)
         learning_rates = cycle(rates)
         net = SimpleNet().to(device)
@@ -65,7 +68,6 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
         losses = []
         testing_losses = []
         for epochs in epoch_limits:
-            # print("Epochs: ", epochs)
             for epoch in range(epochs):
                 losses = train(net, optimizer, train_loader, losses, epoch, criterion, batch_size)
                 testing_losses = test(net, test_loader, testing_losses, epoch, criterion, batch_size)
@@ -73,12 +75,17 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
             adjust_lr(optimizer, new_lr)
 
         stop = timeit.default_timer()
-        # print (f"\n ### Finished Training in {stop - start} ### \n")
+        print (f"\n ### Finished Training in {stop - start} ### \n")
         
-        losses_of_interest = [losses[n] for n in epochs_of_interest]
-        testing_losses_of_interest = [testing_losses[n] for n in epochs_of_interest]
-        print("Losses: ", losses)
-        # print("Testing losses: ", testing_losses)
+        starting_index = [((n-1) * losses_per_epoch,n * losses_per_epoch) for n in epochs_of_interest]
+        losses_of_interest = [x for n in epochs_of_interest for x in losses[(n-1) * losses_per_epoch:n * losses_per_epoch]]
+        testing_losses_of_interest = [x for n in epochs_of_interest for x in testing_losses[(n-1) * losses_per_epoch:n * losses_per_epoch]]
+
+        print(losses)
+        print("\n\n")
+        print(losses_of_interest)
+        print("\n")
+        print(losses[60:80])
 
         min_training_loss_no_extra, min_testing_loss_no_extra = calculate_min_losses(losses_of_interest, testing_losses_of_interest)
         minimal_losses.append((rates, min_training_loss_no_extra, min_testing_loss_no_extra))
@@ -86,16 +93,14 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
         min_training_loss, min_testing_loss = calculate_min_losses(losses, testing_losses)
         min_training_local_losses, min_testing_local_losses = calculate_local_losses(losses, testing_losses, epoch_limits)
         
-        # axes.plot(range(sum(epoch_limits)), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
-        # axes.plot(range(sum(epoch_limits)), testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
         plot_training_testing_losses(axes, sum(epoch_limits), losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
         color_map_index += 1
     
     axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
-    plt.savefig(path, bbox_inches="tight")
+    plt.savefig(path + ".png", bbox_inches="tight")
     plt.close()
-    print(minimal_losses)
-    print("MIN: ", min(minimal_losses, key=lambda x:x[1]))
+    
+    write_to_csv(path, minimal_losses)
     return min(minimal_losses, key=lambda x:x[1])
 
 def set_up_plot(title, x_label_title, y_label_title):
@@ -113,7 +118,9 @@ def train(model, optimizer, train_loader, losses, epoch, criterion, batch_size):
     running_loss_count = 0.0
     running_loss_sum = 0.0
     train_iter = iter(train_loader)
+    batch_number = 0
     for x_batch, y_batch in train_iter:
+        batch_number += 1
         x_batch, y_batch = x_batch.to(device), y_batch.to(device)
         # forward pass
         preds = model(x_batch)
@@ -130,8 +137,16 @@ def train(model, optimizer, train_loader, losses, epoch, criterion, batch_size):
         running_loss_count += batch_size
         running_loss_sum += loss.item() * batch_size
 
-    running_loss_mean = running_loss_sum/running_loss_count
-    losses.append(running_loss_mean)
+        if batch_number % 20 == 0:
+            running_loss_mean = running_loss_sum/running_loss_count
+            losses.append(running_loss_mean)
+            running_loss_sum = 0.0
+            running_loss_count = 0.0
+            batch_number = 0
+    if batch_number != 0:
+        running_loss_mean = running_loss_sum/running_loss_count
+        losses.append(running_loss_mean)
+
     # print(f"Epoch {epoch}: Training loss mean: {running_loss_mean}")
     return losses
 
@@ -139,14 +154,25 @@ def test(model, test_loader, testing_losses, epoch, criterion, batch_size):
     running_loss_test_count = 0.0
     running_loss_test_sum = 0.0
     test_iter = iter(test_loader)
+    batch_number = 0
     with torch.no_grad():
         for x_test, y_test in test_iter:
+            batch_number += 1
             x_test, y_test = x_test.to(device), y_test.to(device)
             predictions = model(x_test)
             testing_loss = criterion(predictions, y_test)
             running_loss_test_count += batch_size
             running_loss_test_sum += testing_loss.item() * batch_size
-        running_loss_test_mean = running_loss_test_sum / running_loss_test_count 
+            
+            if batch_number % 20 == 0:
+                running_loss_test_mean = running_loss_test_sum/running_loss_test_count
+                testing_losses.append(running_loss_test_mean)
+                running_loss_test_sum = 0.0
+                running_loss_test_count = 0.0
+                batch_number = 0
+
+    if batch_number != 0:
+        running_loss_test_mean = running_loss_test_sum/running_loss_test_count
         testing_losses.append(running_loss_test_mean)
 
     # print(f"Epoch {epoch}: Testing loss mean: {running_loss_test_mean}")
@@ -169,51 +195,12 @@ def calculate_local_losses(losses, testing_losses, epochs):
     return min_training_local_losses, min_testing_local_losses
 
 def plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates):
-    print(f"Rates: {rates}, Losses: {losses}")
-    axes.plot(range(epochs), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
-    axes.plot(range(epochs), testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
+    axes.plot(np.arange(0, epochs, 1/(len(losses)/epochs)), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
+    axes.plot(np.arange(0, epochs, 1/(len(testing_losses)/epochs)) , testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
 
-def find_max_lr(step:float=1) -> int:
-    
-    criterion = nn.MSELoss(reduction="mean")
-    train_loader = torch.utils.data.DataLoader(training_data, batch_size=128, shuffle=True)
-    test_loader = torch.utils.data.DataLoader(test_data, batch_size=50000, shuffle=False)
-    lr = 1
-    while True:
-        torch.manual_seed(1)
-        net = SimpleNet().to(device)
-        optimizer = optim.SGD(net.parameters(), lr=lr, momentum=0.9)
-        losses = []
-        train_iter = iter(train_loader)
-        for x_batch, y_batch in train_iter:
-            x_batch, y_batch = x_batch.to(device), y_batch.to(device)
-            # forward pass
-            preds = net(x_batch)
-
-            # backward pass
-            loss = criterion(preds, y_batch)
-            optimizer.zero_grad()
-            loss.backward()
-
-            # update parameters
-            optimizer.step()
-
-            # print progress
-            losses.append(loss.item())
-
-        test_iter = iter(test_loader)
-        with torch.no_grad():
-            for x_test, y_test in test_iter:
-                x_test, y_test = x_test.to(device), y_test.to(device)
-                predictions = net(x_test)
-                testing_loss = criterion(predictions, y_test)
-                losses.append(testing_loss.item())
-
-        if isnan(losses).any() == True or float("inf") in losses:
-            return lr - 1
-        
-        lr += step
-
+def write_to_csv(path, minimal_losses):
+    table = pd.DataFrame(data={"Learning rates":[x[0] for x in minimal_losses], "Minimal training loss":[x[1] for x in minimal_losses], "Minimal testing loss":[x[2] for x in minimal_losses]})
+    table.to_csv(path + ".csv")
 
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
@@ -223,20 +210,15 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-basic_rates = [18,10,1,0.1]
-rate_modifiers = [0.03, 0.1, 0.3]
-modified_rates = [[a,a*r,a*r*r] for a in basic_rates for r in rate_modifiers]
-
-
 # Step 1 - find minimal learning rate for first epoch:
 learning_rates = [[x] for x in np.arange(0.1, 1.1, 0.05)]
 epochs = [[3] for x in learning_rates]
-min_by_epochs = [[0] for x in learning_rates]
-minimal_loss_part_one = train_and_test_model(learning_sets=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/wykres.png")[0][0]
+min_by_epochs = [[1] for x in learning_rates]
+minimal_loss_part_one = train_and_test_model(learning_sets=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_pierwszy")[0][0]
 print(minimal_loss_part_one)
 
 new_learning_rates = [[minimal_loss_part_one, x] for x in np.arange(minimal_loss_part_one, 0, -0.05)]
 new_epochs = [[3, 2] for x in new_learning_rates]
-min_by_epochs = [[3] for x in new_learning_rates]
-minimal_loss_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/wykres5.png")
+min_by_epochs = [[4] for x in new_learning_rates]
+minimal_loss_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_drugi")
 print(minimal_loss_part_two)
