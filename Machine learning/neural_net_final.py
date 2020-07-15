@@ -52,8 +52,10 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
 
     color_map = plt.cm.get_cmap('gist_ncar', len(learning_sets))
     color_map_index = 0
-    figure, axes = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss (log10)")
-    
+    figure_both, axes_both = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss (log10)")
+    figure_training, axes_training = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss log(10)")
+    figure_testing, axes_testing = set_up_plot("CIFAR-10 learning rates comparison", "Epochs", "Loss log(10)")
+
     start = timeit.default_timer()
     
     minimal_losses = []
@@ -80,25 +82,30 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
         starting_index = [((n-1) * losses_per_epoch,n * losses_per_epoch) for n in epochs_of_interest]
         losses_of_interest = [x for n in epochs_of_interest for x in losses[(n-1) * losses_per_epoch:n * losses_per_epoch]]
         testing_losses_of_interest = [x for n in epochs_of_interest for x in testing_losses[(n-1) * losses_per_epoch:n * losses_per_epoch]]
-
-        print(losses)
-        print("\n\n")
-        print(losses_of_interest)
-        print("\n")
-        print(losses[60:80])
-
+        
+        # Minimal losses only by chosen epochs of interest
         min_training_loss_no_extra, min_testing_loss_no_extra = calculate_min_losses(losses_of_interest, testing_losses_of_interest)
         minimal_losses.append((rates, min_training_loss_no_extra, min_testing_loss_no_extra))
-
+        
+        # Minimal local losses, meaning minimal loss for every learning rate used
         min_training_loss, min_testing_loss = calculate_min_losses(losses, testing_losses)
         min_training_local_losses, min_testing_local_losses = calculate_local_losses(losses, testing_losses, epoch_limits)
         
-        plot_training_testing_losses(axes, sum(epoch_limits), losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates)
+        # Plot training and testing losses on one plot
+        all_epochs = sum(epoch_limits)
+        plot_training_losses(axes_both, all_epochs, losses, color_map, color_map_index, min_training_loss, min_training_local_losses, rates)
+        plot_testing_losses(axes_both, all_epochs, testing_losses, color_map, color_map_index, min_testing_loss, min_testing_local_losses, rates)
+        
+        # Plot only training losses
+        plot_training_losses(axes_training, all_epochs, losses, color_map, color_map_index, min_training_loss, min_training_local_losses, rates)
+        
+        # Plot only testing losses
+        plot_testing_losses(axes_testing, all_epochs, testing_losses, color_map, color_map_index, min_testing_loss, min_testing_local_losses, rates)
         color_map_index += 1
     
-    axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
-    plt.savefig(path + ".png", bbox_inches="tight")
-    plt.close()
+    save_plot(figure_both, axes_both, path + "_both.png")
+    save_plot(figure_training, axes_training, path + "_training.png")
+    save_plot(figure_testing, axes_testing, path + "_testing.png")
     
     write_to_csv(path, minimal_losses)
     return min(minimal_losses, key=lambda x:x[1])
@@ -108,8 +115,8 @@ def set_up_plot(title, x_label_title, y_label_title):
     plt.title(title, fontsize=18)
     axes.set_xlabel(x_label_title, fontsize=15)
     axes.set_ylabel(y_label_title, fontsize=15)
-    plt.yscale(value="log")
-    plt.grid()
+    axes.set_yscale(value="log")
+    axes.grid(axis="both", which="both")
    
     return figure, axes
 
@@ -194,9 +201,16 @@ def calculate_local_losses(losses, testing_losses, epochs):
 
     return min_training_local_losses, min_testing_local_losses
 
-def plot_training_testing_losses(axes, epochs, losses, testing_losses, color_map, color_map_index, min_training_loss, min_testing_loss, min_training_local_losses, min_testing_local_losses, rates):
+def plot_training_losses(axes, epochs, losses, color_map, color_map_index, min_training_loss, min_training_local_losses, rates):
     axes.plot(np.arange(0, epochs, 1/(len(losses)/epochs)), losses, color=color_map(color_map_index), label=f"Lr={rates}, Training min={min_training_loss}, Local mins={min_training_local_losses}")
+
+def plot_testing_losses(axes, epochs, testing_losses, color_map, color_map_index, min_testing_loss, min_testing_local_losses, rates):
     axes.plot(np.arange(0, epochs, 1/(len(testing_losses)/epochs)) , testing_losses, color=np.array(color_map(color_map_index)) * 0.6, label=f"Lr={rates}, Testing min={min(testing_losses)}, Local mins={min_testing_local_losses}")
+
+def save_plot(figure, axes, path):
+    axes.legend(bbox_to_anchor=(1.04,1), loc="upper left")
+    figure.savefig(path, bbox_inches="tight")
+    plt.close(fig=figure)
 
 def write_to_csv(path, minimal_losses):
     table = pd.DataFrame(data={"Learning rates":[x[0] for x in minimal_losses], "Minimal training loss":[x[1] for x in minimal_losses], "Minimal testing loss":[x[2] for x in minimal_losses]})
@@ -211,14 +225,14 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 entry_len = training_data[0][0].shape[0]
 
 # Step 1 - find minimal learning rate for first epoch:
-learning_rates = [[x] for x in np.arange(0.1, 1.1, 0.05)]
+learning_rates = [[round(x,2)] for x in np.arange(0.1, 1.05, 0.05)]
 epochs = [[3] for x in learning_rates]
 min_by_epochs = [[1] for x in learning_rates]
-minimal_loss_part_one = train_and_test_model(learning_sets=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_pierwszy")[0][0]
-print(minimal_loss_part_one)
+best_lr_part_one = train_and_test_model(learning_sets=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_pierwszy")[0][0]
+print(best_lr_part_one)
 
-new_learning_rates = [[minimal_loss_part_one, x] for x in np.arange(minimal_loss_part_one, 0, -0.05)]
+new_learning_rates = [[best_lr_part_one, round(x,2)] for x in np.arange(best_lr_part_one, 0, -0.05)]
 new_epochs = [[3, 2] for x in new_learning_rates]
 min_by_epochs = [[4] for x in new_learning_rates]
-minimal_loss_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_drugi")
-print(minimal_loss_part_two)
+best_lr_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_drugi")
+print(best_lr_part_two)
