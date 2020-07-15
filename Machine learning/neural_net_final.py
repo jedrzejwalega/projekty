@@ -39,7 +39,7 @@ def get_lr(optimizer):
     for param_group in optimizer.param_groups:
         return param_group['lr']
 
-def one_hot_encode(data: torch.utils.data.Dataset):
+def one_hot_encode_digits(data: torch.utils.data.Dataset):
     return keras.utils.to_categorical(data, 10)
 
 def flatten_vector(data: torch.utils.data.Dataset):
@@ -219,8 +219,8 @@ def write_to_csv(path, minimal_losses):
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
 
-training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
-test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode))
+training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode_digits))
+test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode_digits))
 
 entry_len = training_data[0][0].shape[0]
 
@@ -234,5 +234,5 @@ print(best_lr_part_one)
 new_learning_rates = [[best_lr_part_one, round(x,2)] for x in np.arange(best_lr_part_one, 0, -0.05)]
 new_epochs = [[3, 2] for x in new_learning_rates]
 min_by_epochs = [[4] for x in new_learning_rates]
-best_lr_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_drugi")
-print(best_lr_part_two)
+best_lr_part_two = train_and_test_model(learning_sets=new_learning_rates, batch_size=128, epochs_per_lr=new_epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/etap_drugi")[0]
+print(f"Best learning rates: {best_lr_part_two}")
