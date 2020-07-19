@@ -109,14 +109,26 @@ class Model():
 class SimpleNet(nn.Module):
     def __init__(self):
         super(SimpleNet, self).__init__()
-        self.fc1 = nn.Linear(entry_len, 256)
+        self.conv1 = nn.Conv2d(in_channels=3, out_channels=6, kernel_size=3)
+        self.conv2 = nn.Conv2d(in_channels=6, out_channels=10, kernel_size=3)
+        self.fc1 = nn.Linear(7840, 256)
         self.fc2 = nn.Linear(256, 64)
         self.fc3 = nn.Linear(64, 10)
 
     def forward(self, x):
+        # print("BEFORE CONV shape: ", x.shape)
+        x = torch.sigmoid(self.conv1(x))
+        # print("CONV1 shape: ", x.shape)
+        x = torch.sigmoid(self.conv2(x))
+        # print("CONV2 shape: ", x.shape)
+        x = x.resize(x.shape[0], 7840)
+        # print("FLATTENED shape: ", x.shape)
         x = torch.sigmoid(self.fc1(x))
+        # print("LINEAR 1 shape: ", x.shape)
         x = torch.sigmoid(self.fc2(x))
+        # print("LINEAR 2 shape: ", x.shape)
         x = self.fc3(x)
+        # print("LINEAR 3 shape: ", x.shape)
         return x
     
 
@@ -194,7 +206,7 @@ def train_and_test_model(learning_sets:List[List[float]], batch_size:int, epochs
         model.min_training_loss, model.min_testing_loss = calculate_min_losses(model.losses, model.testing_losses)
 
         # Minimal local losses, meaning minimal loss for every learning rate used
-        model.min_training_local_losses, model.min_testing_local_losses = calculate_local_losses(model.losses, model.testing_losses, epoch_limits)
+        model.min_training_local_losses, model.min_testing_local_losses = calculate_local_losses(model.losses, model.testing_losses, epoch_limits, losses_per_epoch)
         
         # Plot training and testing losses on one plot
         all_epochs = sum(epoch_limits)
@@ -231,14 +243,14 @@ def calculate_min_losses(losses, testing_losses):
     min_testing_loss = min(testing_losses)
     return min_training_loss, min_testing_loss
 
-def calculate_local_losses(losses, testing_losses, epochs):
+def calculate_local_losses(losses, testing_losses, epochs, losses_per_epoch):
     min_training_local_losses = []
     min_testing_local_losses = []
     first_index = 0
     for epoch_cycle in epochs:
-        min_training_local_losses.append(min(losses[first_index:first_index + epoch_cycle]))
-        min_testing_local_losses.append(min(testing_losses[first_index:first_index + epoch_cycle]))
-        first_index = epoch_cycle
+        min_training_local_losses.append(min(losses[first_index:first_index + epoch_cycle * losses_per_epoch]))
+        min_testing_local_losses.append(min(testing_losses[first_index:first_index + epoch_cycle * losses_per_epoch]))
+        first_index = first_index + epoch_cycle * losses_per_epoch
 
     return min_training_local_losses, min_testing_local_losses
 
@@ -260,8 +272,8 @@ def write_to_csv(path, minimal_losses):
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
 
-training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode_digits))
-test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode_digits))
+training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor()]), target_transform=one_hot_encode_digits))
+test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor()]), target_transform=one_hot_encode_digits))
 
 entry_len = training_data[0][0].shape[0]
 learning_rates = generate_learning_rates(gamma=0.5, how_many=8, starting_learning_rate=1)
