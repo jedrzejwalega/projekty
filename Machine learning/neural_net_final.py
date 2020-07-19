@@ -16,6 +16,7 @@ from numpy import isnan
 from itertools import cycle
 from math import ceil
 from copy import deepcopy
+from machine_learning_helper import generate_learning_rates
 
 
 class Model():
@@ -257,6 +258,8 @@ def write_to_csv(path, minimal_losses):
     table = pd.DataFrame(data={"Learning rates":[x[0] for x in minimal_losses], "Minimal training loss":[x[1] for x in minimal_losses], "Minimal testing loss":[x[2] for x in minimal_losses]})
     table.to_csv(path + ".csv")
 
+
+
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
 
@@ -265,7 +268,6 @@ test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", downlo
 
 entry_len = training_data[0][0].shape[0]
 
-learning_rates = [[round(x, 2)] for x in np.arange(0.1, 1.05, 0.05)]
 epochs = [[3], [2]]
 min_by_epochs = [[1], [4]]
 
