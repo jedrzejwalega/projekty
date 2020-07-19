@@ -16,7 +16,7 @@ from numpy import isnan
 from itertools import cycle
 from math import ceil
 from copy import deepcopy
-
+from machine_learning_helper.generate_learning_rates import *
 
 class Model():
     def __init__(self, batch_size, learning_rates, criterion=nn.MSELoss(reduction="mean")):
@@ -54,7 +54,7 @@ class Model():
             # update parameters
             self.optimizer.step()
 
-            # print progress
+            # add loss to sum
             running_loss_count += self.batch_size
             running_loss_sum += loss.item() * self.batch_size
 
@@ -126,7 +126,7 @@ def one_hot_encode_digits(data: torch.utils.data.Dataset):
 def flatten_vector(data: torch.utils.data.Dataset):
     return torch.flatten(data)
 
-def find_best_lr(learning_rates_set:List[List[float]], batch_size:int, epochs_per_lr:List[List[float]], min_by_epochs:List[List[float]], path=str):
+def find_best_lr(learning_rates_set:List[List[float]], batch_size:int, epochs_per_lr:List[List[float]], min_by_epochs:List[List[float]], gamma=0.1, path=str):
     first_epoch_limit = epochs_per_lr[0]
     first_epoch_indicator = min_by_epochs[0]
     epoch_limits = [first_epoch_limit for x in learning_rates_set]
@@ -134,7 +134,7 @@ def find_best_lr(learning_rates_set:List[List[float]], batch_size:int, epochs_pe
     model = train_and_test_model(learning_sets=learning_rates_set, batch_size=batch_size, epochs_per_lr=epoch_limits, min_by_epochs=epoch_indicators, path=path + "_etap_1")
     for stage, (epoch_limit, epochs_of_interest) in enumerate(zip(epochs_per_lr[1:], min_by_epochs[1:])):
         learning_rate_limit = model.lr_history[-1]
-        new_rates = [[round(x, 2)] for x in np.arange(learning_rate_limit, 0, -0.05)]
+        new_rates = generate_learning_rates(starting_learning_rate=learning_rate_limit, how_many=8, gamma=gamma)
         new_epoch_limits = [epoch_limit for x in new_rates]
         new_epoch_indicators =  [epochs_of_interest for x in new_rates]
         model = train_and_test_model(learning_sets=new_rates, batch_size=batch_size, epochs_per_lr=new_epoch_limits, min_by_epochs=new_epoch_indicators, path=path + f"_etap_{stage+2}", pretrained_model=model)
@@ -264,10 +264,10 @@ training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", tr
 test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor(), flatten_vector]), target_transform=one_hot_encode_digits))
 
 entry_len = training_data[0][0].shape[0]
-
-learning_rates = [[round(x, 2)] for x in np.arange(0.1, 1.05, 0.05)]
+learning_rates = generate_learning_rates(gamma=0.5, how_many=8, starting_learning_rate=1)
+print(learning_rates)
 epochs = [[3], [2]]
 min_by_epochs = [[1], [4]]
 
-best_model = find_best_lr(learning_rates_set=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/CIFAR10_best_lr")
+best_model = find_best_lr(learning_rates_set=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/CIFAR10_best_lr", gamma=0.5)
 print(best_model.lr_history)
