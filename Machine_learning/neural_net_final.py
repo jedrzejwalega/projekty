@@ -274,12 +274,11 @@ device = torch.device("cuda" if use_cuda else "cpu")
 
 training_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", train=True, download=True, transform=transforms.Compose([transforms.ToTensor()]), target_transform=one_hot_encode_digits))
 test_data = list(cifar.CIFAR10("/home/jedrzej/Desktop/Machine_learning/", download=True, transform=transforms.Compose([transforms.ToTensor()]), target_transform=one_hot_encode_digits))
-
 entry_len = training_data[0][0].shape[0]
-learning_rates = generate_learning_rates(gamma=0.5, how_many=8, starting_learning_rate=1)
-print(learning_rates)
-epochs = [[3], [2]]
-min_by_epochs = [[1], [4]]
+# learning_rates = generate_learning_rates(gamma=0.5, how_many=8, starting_learning_rate=1)
+# print(learning_rates)
+# epochs = [[3], [2]]
+# min_by_epochs = [[1], [4]]
 
-best_model = find_best_lr(learning_rates_set=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/CIFAR10_best_lr", gamma=0.5)
-print(best_model.lr_history)
+# best_model = find_best_lr(learning_rates_set=learning_rates, batch_size=128, epochs_per_lr=epochs, min_by_epochs=min_by_epochs, path="/home/jedrzej/Desktop/CIFAR10_best_lr", gamma=0.5)
+# print(best_model.lr_history)
